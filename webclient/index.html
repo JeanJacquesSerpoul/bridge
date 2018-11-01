@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=0.9">
+      <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet'>
+      <link rel="stylesheet" href="css/bridge.css?v=0066"/>
+      <link rel="stylesheet" href="css/jquery-ui-1.12.1.css"/>
+      <script src="js/jquery-3.3.1.min.js"></script>
+      <script src="js/jquery-ui.1.12.1.js"></script>
+      <script src="js/bridge.js?v=0040"></script>
+      <title>Bridge-Generateur de donnes</title>
+   </head>
+   <body>
+      <table>
+         <tr>
+            <td></td>
+            <td>
+               <div  class="cardscontainer">
+                  <div class="colorblack">♠</div>
+                  <div id="north-spade" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorred">♥</div>
+                  <div id="north-heart" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorred">♦</div>
+                  <div id="north-diamond" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorblack">♣</div>
+                  <div id="north-club" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div id="np" class="cards points"></div>
+               </div>
+            </td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>
+               <div class="cardscontainer">
+                  <div class="colorblack">♠</div>
+                  <div id="west-spade" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorred">♥</div>
+                  <div id="west-heart" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorred">♦</div>
+                  <div id="west-diamond" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorblack">♣</div>
+                  <div id="west-club" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div id="wp" class="cards  points"></div>
+               </div>
+            </td>
+            <td>
+               
+               <span id="vuldeal">
+                  D
+                  <select id="dealer" name="dealer">
+                     <option  value="N">Nord</option>
+                     <option  value="E">Est</option>
+                     <option  value="S">Sud</option>
+                     <option  value="W">Ouest</option>
+                  </select>
+                  <br/> <br/>
+                  V
+                  <select id="vulnerable" name="vulnerable">
+                     <option value="NONE">Personne</option>
+                     <option value="NS">NS</option>
+                     <option value="EW">EO</option>
+                     <option value="ALL">Tous</option>
+                  </select>
+               </span>
+               </div>    
+            </td>
+            <td>
+               <div class="cardscontainer">
+                  <div class="colorblack">♠</div>
+                  <div id="east-spade" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorred">♥</div>
+                  <div id="east-heart" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorred">♦</div>
+                  <div id="east-diamond" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorblack">♣</div>
+                  <div id="east-club" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div id="ep" class="cards  points"></div>
+               </div>
+            </td>
+         </tr>
+         <tr>
+            <td></td>
+            <td>
+               <div class="cardscontainer">
+                  <div class="colorblack">♠</div>
+                  <div id="south-spade" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorred">♥</div>
+                  <div id="south-heart" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorred">♦</div>
+                  <div id="south-diamond" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div class="colorblack">♣</div>
+                  <div id="south-club" class="cards"></div>
+               </div>
+               <div class="cardscontainer">
+                  <div id="sp" class="cards  points"></div>
+               </div>
+            </td>
+            <td></td>
+         </tr>
+      </table>
+      <div id="masque">
+         <table >
+             <tr>
+                 <td>&nbsp;<span id="wait"><img src="images/wait.gif" alt=""  width="65" height="10"></span></td>
+             </tr>
+            <tr>
+               <td>
+                  Masquer Nord<input type="checkbox" name="h-n" id="h-n" onclick="viewHand('N');" value="1">&nbsp;
+                  Est<input type="checkbox" name="h-e" id="h-e" onclick="viewHand('E');" value="1">&nbsp;
+                  Sud<input type="checkbox" name="h-s" id="h-s" onclick="viewHand('S');" value="1">&nbsp;
+                  Ouest<input type="checkbox" name="h-w" id="h-w" onclick="viewHand('W');" value="1">
+               </td>
+            </tr>
+         </table>
+      </div>
+      <div id="showpar">
+         <table>
+            <thead>
+               <tr>
+                  <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PAR et nombre de levees potentielles de la donne affichee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+               </tr>
+            </thead>
+            <tr>
+               <td colspan="6"><span id="showscore">&nbsp;</span></td>
+            </tr>
+            <tr>
+               <td>Levees</td>
+               <td>Piques</td>
+               <td>Coeur</td>
+               <td>Carreau</td>
+               <td>Trefles</td>
+               <td>SA</td>
+            </tr>
+            <tr>
+               <td>NS</td>
+               <td id="td-ns"><span id="ns"></span></td>
+               <td id="td-nh"><span id="nh"></span></td>
+               <td id="td-nd"><span id="nd"></span></td>
+               <td id="td-nc"><span id="nc"></span></td>
+               <td id="td-nnt"><span id="nnt"></span></td>
+            </tr>
+            <tr>
+               <td>EO</td>
+               <td id="td-es"><span id="es"></span></td>
+               <td id="td-eh"><span id="eh"></span></td>
+               <td id="td-ed"><span id="ed"></span></td>
+               <td id="td-ec"><span id="ec"></span></td>
+               <td id="td-ent"><span id="ent"></span></td>
+            </tr>
+         </table>
+      </div>
+      <br/>
+      <div id="action">
+         <input title="Génère une donne aléatoire avec les contraintes ci-dessus." name="generatebtn" id="generatebtn" class="button" type="button" onclick="generate();" value="Generer">
+         <input title="Affiche le par de la donne." class="button" type="button" name="calcparbtn" id="calcparbtn" onclick="calcPar();" value="PAR">
+         <input title="Effectue une rotation des mains de 90 degres." class="button" type="button" name="rotbtn" id="rotbtn" onclick="rot();" value="Rotation">
+         <input title="Réinitialise toutes les données." class="button" type="button" name="razbtn" id="razbtn" onclick="raz();" value="Raz">
+         <input title="Génère le fichier pbn pour la donne affichée." class="button" name="pbnonebtn" id="pbnonebtn" type="button" onclick="pbnOne();" value="Pbn">
+         <input title="Génère un fichier pbn avec N donnes." class="button" type="button" name="pbnbtn" id="pbnbtn" onclick="pbn();" value="X-pbn"> <input type="text" id="count" name="count" size="3" value="1" >
+      </div>
+      <div id="tabulation">
+      <div id="tabs">
+         <ul>
+            <li><a href="#tabs-1">Cartes imposees</a></li>
+            <li><a href="#tabs-2">Repartition des couleurs</a></li>
+            <li><a href="#tabs-3">Repartition des points</a></li>
+         </ul>
+         <div id="tabs-1">
+            <div id="random">
+               <table>
+                  <thead>
+                     <tr>
+                        <td></td>
+                        <td>&nbsp;Piques</td>
+                        <td>&nbsp;Coeur</td>
+                        <td>&nbsp;Carreau</td>
+                        <td>&nbsp;Trefles</td>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Nord&nbsp;</td>
+                        <td><input type="text" id="n-s" name="n-s"  size="10"></td>
+                        <td><input type="text" id="n-h" name="n-h"  size="10"></td>
+                        <td><input type="text" id="n-d" name="n-d"  size="10"></td>
+                        <td><input type="text" id="n-c" name="n-c"  size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Est&nbsp;</td>
+                        <td><input type="text" id="e-s" name="e-s"  size="10"></td>
+                        <td><input type="text" id="e-h" name="e-h"  size="10"></td>
+                        <td><input type="text" id="e-d" name="e-d"  size="10"></td>
+                        <td><input type="text" id="e-c" name="e-c"  size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Sud&nbsp;</td>
+                        <td><input type="text" id="s-s" name="s-s"  size="10"></td>
+                        <td><input type="text" id="s-h" name="s-h"  size="10"></td>
+                        <td><input type="text" id="s-d" name="s-d"  size="10"></td>
+                        <td><input type="text" id="s-c" name="s-c"  size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Ouest&nbsp;</td>
+                        <td><input type="text" id="w-s" name="w-s"  size="10"></td>
+                        <td><input type="text" id="w-h" name="w-h"  size="10"></td>
+                        <td><input type="text" id="w-d" name="w-d"  size="10"></td>
+                        <td><input type="text" id="w-c" name="w-c"  size="10"></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div id="tabs-2">
+            <div id="random-colors">
+               <table>
+                  <thead>
+                     <tr>
+                        <td></td>
+                        <td>&nbsp;Piques</td>
+                        <td>&nbsp;Coeur</td>
+                        <td>&nbsp;Carreau</td>
+                        <td>&nbsp;Trefles</td>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Nord&nbsp;</td>
+                        <td><input type="text" id="c-n-s" name="c-n-s"  size="10"></td>
+                        <td><input type="text" id="c-n-h" name="c-n-h"  size="10"></td>
+                        <td><input type="text" id="c-n-d" name="c-n-d"  size="10"></td>
+                        <td><input type="text" id="c-n-c" name="c-n-c"  size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Est&nbsp;</td>
+                        <td><input type="text" id="c-e-s" name="c-e-s"  size="10"></td>
+                        <td><input type="text" id="c-e-h" name="c-e-h"  size="10"></td>
+                        <td><input type="text" id="c-e-d" name="c-e-d"  size="10"></td>
+                        <td><input type="text" id="c-e-c" name="c-e-c"  size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Sud&nbsp;</td>
+                        <td><input type="text" id="c-s-s" name="c-s-s"  size="10"></td>
+                        <td><input type="text" id="c-s-h" name="c-s-h"  size="10"></td>
+                        <td><input type="text" id="c-s-d" name="c-s-d"  size="10"></td>
+                        <td><input type="text" id="c-s-c" name="c-s-c"  size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Ouest&nbsp;</td>
+                        <td><input type="text" id="c-w-s" name="c-w-s"  size="10"></td>
+                        <td><input type="text" id="c-w-h" name="c-w-h"  size="10"></td>
+                        <td><input type="text" id="c-w-d" name="c-w-d"  size="10"></td>
+                        <td><input type="text" id="c-w-c" name="c-w-c"  size="10"></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div id="tabs-3">
+            <div id="random-points">
+               <table>
+                  <thead>
+                     <tr>
+                        <td></td>
+                        <td>&nbsp;Mini</td>
+                        <td>&nbsp;Maxi</td>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Nord&nbsp;</td>
+                        <td><input type="text" id="nmin" name="nmin"  size="10"></td>
+                        <td><input type="text" id="nmax" name="nmax"   size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Est&nbsp;</td>
+                        <td><input type="text" id="emin" name="emin"  size="10"></td>
+                        <td><input type="text" id="emax" name="emax"  size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Sud&nbsp;</td>
+                        <td><input type="text" id="smin" name="smin"  size="10"></td>
+                        <td><input type="text" id="smax" name="smax"   size="10"></td>
+                     </tr>
+                     <tr>
+                        <td style="background-color:darkgrey">&nbsp;Ouest&nbsp;</td>
+                        <td><input type="text" id="wmin" name="wmin"  size="10"></td>
+                        <td><input type="text" id="wmax" name="wmax" size="10"></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div id="generation">
+         <table>
+            <td>
+                <input title="Affiche la donne au format PBN.(Si la 1ere main n'est pas Nord, mettre au debut du PBN E: pour Est, S: pour Sud, W: pour Ouest, puis cliquer sur PBN)" class="button" name="setpbnbtn" id="setpbnbtn" type="button" onclick="setPbn();" value="PBN">      
+                <br/>
+                <input type="text" id="currentpbn" name="currentpbn" placeholder="PBN" size="75">
+            </td>
+            </tr>
+            <tr>
+               <td>
+                   <input title="Génère la donne associée à l'index." class="button" type="button" name="getfromindexbtn" id="getfromindexbtn" onclick="getFromIndex();" value="Index">
+                   <br/>
+                   <input type="text" id="index-donne" name="index-donne" size="75" placeholder="Index de la donne">
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <input type="text" id="comment" name="comment" placeholder="Commentaire" size="75">
+               </td>
+            </tr>
+         </table>
+      </div>
+      <div id="showversion">
+         <table>
+            <tr>
+               <td id="version">API version : </td>
+            </tr>
+            <tr>
+               <td>Le calcul du par est base sur la librairie dds: https://github.com/dds-bridge/dds</td>
+            </tr>
+         </table>
+      </div>
+      <div id="error">
+         <table>
+            <thead>
+               <tr>
+                  <td>Impossible de generer une donne !!</td>
+               </tr>
+            </thead>
+         </table>
+      </div>
+      <div id="okpbn">N</div>
+   </body>
+</html>

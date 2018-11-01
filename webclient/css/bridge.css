@@ -1,0 +1,145 @@
+body {
+    font-family: 'Arimo';
+    font-size: 14px;
+    margin: auto;
+    width: 40%;
+    border: 0px;
+}
+
+.hand {
+    width: 150px;
+    height: 25px;
+}
+.colorred {
+    width: 20px;
+    height: 25px;
+    color: red;
+    float: left;
+}
+.colorblack {
+    width: 20px;
+    height: 25px;
+    color: black;
+    float: left;
+}
+.cardscontainer {
+    width: 190px;
+    height: 25px;
+}
+.cards{
+    float:left;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;  
+}
+
+
+.button:hover {
+	opacity: 0.85;
+}
+
+.button:active {
+	box-shadow: inset 0 3px 4px hsla(0, 0%, 0%, 0.2);
+}
+
+.button:focus {
+	outline: thin dotted #444;
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: -2px;
+}	
+
+.button {
+    display: inline-block;
+    background-color:darkgrey ;
+    color: #FFF;
+    padding: 10px 15px;
+    margin:2px 0px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+	-webkit-appearance: none;
+	-webkit-font-smoothing: antialiased;
+}
+
+#error{
+    display:none;
+}
+#error table {
+    width:600px;
+}
+#error thead {
+    background-color:red;
+    color:white;
+    text-align: center;
+}
+#mask{
+    display:none;
+}
+#okpbn{
+    display:none;
+}
+#tabulation {
+    width:525px;
+    height:230px;
+}
+#color-status{
+    background-color: red;
+}
+
+.points {
+    color:gray
+}
+#showversion table{
+    color:gray;
+    font-size:10px;
+    text-align: center;
+    width:600px;
+}
+#wait{
+    display: none;
+}
+input[type=button]:disabled {
+    background-color: lightgrey;
+}
+
+#showpar {
+    text-align: center;
+    width:535px;
+}
+#showpar table {
+    border: 1px solid gray;
+    color:gray;
+    font-size: 12px;
+    border-collapse:collapse;
+    border-color: gray;
+}
+
+#masque {
+    text-align: center;
+    width: 525px;
+}
+
+#masque table {
+    margin-left: 70px;
+}
+
+#showpar table thead{
+    background-color: lightgrey;
+}
+
+#showpar table td{
+    padding: 5px;
+    border: 1px solid gray;
+    color:gray;
+    border-color: gray;    
+}
+#action{
+    width: 525px;
+}
