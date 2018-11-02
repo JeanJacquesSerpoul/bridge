@@ -142,16 +142,16 @@ function getVersion() {
 	});
 }
 
-function waitHide(){
+function waitHide() {
 	$('#wait').hide();
 	//$('#vuldeal').show();
-	
+
 }
 
-function waitShow(){
+function waitShow() {
 	$('#wait').show();
 	//$('#vuldeal').hide();
-	
+
 }
 
 function getFromIndex() {
@@ -485,10 +485,10 @@ function setPbn() {
 }
 
 
-function getIdemList(result){
-	s1=result.ewl
+function getIdemList(result) {
+	s1 = result.ewl
 	s1 = s1.replace(/EW/gi, "NS").trim();
-	if (s1=result.nsl){
+	if (s1 = result.nsl) {
 		return ""
 	}
 	return s1
@@ -510,7 +510,15 @@ function calcPar() {
 			success: function (data) {
 				if (data != "") {
 					var result = jQuery.parseJSON(data);
-					var par = "Points " + result.nss + " " + result.ews.replace(/EW/gi, "EO").trim() + " Contrats " + translateScore(result.nsl) + " "+translateScore(getIdemList(result)) ;
+					var idem = getIdemList(result)
+					var par = ""
+					if (idem == "") {
+						var h = result.nsl.split(":");
+						par = "Points " + result.nss + " " + result.ews.replace(/EW/gi, "EO").trim() + " Contrats " + translateScore(h[1]);
+
+					} else {
+						par = "Points " + result.nss + " " + result.ews.replace(/EW/gi, "EO").trim() + " Contrats " + translateScore(result.nsl) + " " + idem;
+					}
 					$("#showscore").text(par);
 					$("#nnt").text(result.nnt);
 					$("#ns").text(result.ns);
