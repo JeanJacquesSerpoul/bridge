@@ -4,7 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=0.9">
       <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet'>
-      <link rel="stylesheet" href="css/bridge.css?v=0066"/>
+      <link rel="stylesheet" href="css/bridge.css?v=0069"/>
       <link rel="stylesheet" href="css/jquery-ui-1.12.1.css"/>
       <script src="js/jquery-3.3.1.min.js"></script>
       <script src="js/jquery-ui.1.12.1.js"></script>
@@ -127,18 +127,28 @@
             <td></td>
          </tr>
       </table>
+      <table id="cw">
+         <tr>
+            <td class="container-wait">
+               <div><span id="wait"><img src="images/wait-2.gif" alt=""  width="128" height="15"></span></div>
+            </td>
+         </tr>
+      </table>
       <div id="masque">
          <table >
             <tr>
-               <td>&nbsp;<span id="wait"><img src="images/wait.gif" alt=""  width="65" height="10"></span></td>
+               <td></td>
+               <td>Nord</td>
+               <td>Est</td>
+               <td>Sud</td>
+               <td>Ouest</td>
             </tr>
             <tr>
-               <td>
-                  Masquer Nord<input type="checkbox" name="h-n" id="h-n" onclick="viewHand('N');" value="1">&nbsp;
-                  Est<input type="checkbox" name="h-e" id="h-e" onclick="viewHand('E');" value="1">&nbsp;
-                  Sud<input type="checkbox" name="h-s" id="h-s" onclick="viewHand('S');" value="1">&nbsp;
-                  Ouest<input type="checkbox" name="h-w" id="h-w" onclick="viewHand('W');" value="1">
-               </td>
+               <td>Masquer</td>
+               <td><input type="checkbox" name="h-n" id="h-n" onclick="viewHand('N');" value="1"></td>
+               <td><input type="checkbox" name="h-e" id="h-e" onclick="viewHand('E');" value="1"></td>
+               <td><input type="checkbox" name="h-s" id="h-s" onclick="viewHand('S');" value="1"></td>
+               <td><input type="checkbox" name="h-w" id="h-w" onclick="viewHand('W');" value="1"></td>
             </tr>
          </table>
       </div>
@@ -349,7 +359,7 @@
                <td id="version">API version : </td>
             </tr>
             <tr>
-               <td>Le calcul du par est base sur la librairie dds: https://github.com/dds-bridge/dds</td>
+               <td>Calcul Par voir dds: https://github.com/dds-bridge/dds</td>
             </tr>
          </table>
       </div>
