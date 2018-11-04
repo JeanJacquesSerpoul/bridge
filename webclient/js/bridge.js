@@ -204,6 +204,10 @@ function pbnOne() {
 }
 
 function pbn() {
+	if (activeTabs() >= 3) {
+		return;
+	}
+
 	var count = $("#count").val();
 	var dealer = $("#dealer").find('option:selected').val()
 	var comment = $("#comment").val();
@@ -546,6 +550,9 @@ function calcPar() {
 }
 
 function generate() {
+	if (activeTabs() >= 3) {
+		return;
+	}
 	initCalc();
 	$('#generatebtn').prop("disabled", true);
 	if (activeTabs() == 0) {
