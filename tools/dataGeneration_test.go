@@ -111,10 +111,9 @@ func Test_genDistWithPointToFile(t *testing.T) {
 	}{
 		{"Test1", args{"data.txt", 1, 13}, false},
 	}
-	sh := new(fakeRandom)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := genDistWithPointToFile(sh, tt.args.filepath, tt.args.kmin, tt.args.kmax); (err != nil) != tt.wantErr {
+			if err := genDistWithPointToFile(tt.args.filepath, tt.args.kmin, tt.args.kmax); (err != nil) != tt.wantErr {
 				t.Errorf("genDistWithPointToFile() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

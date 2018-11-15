@@ -85,7 +85,7 @@ func genDistWithPoint(k int) ([]int, []string) {
 	return tpoints, result
 }
 
-func genDistWithPointToFile(sh ShuffleInterface, filepath string, kmin, kmax int) error {
+func genDistWithPointToFile(filepath string, kmin, kmax int) error {
 	var tp, p []int
 	var td, d []string
 	var list []listData
