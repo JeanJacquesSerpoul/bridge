@@ -5,9 +5,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=0.9">
       <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet'>
       <link rel="stylesheet" href="css/bridge.css?v=0069"/>
-      <link rel="stylesheet" href="css/jquery-ui-1.12.1.css"/>
-      <script src="js/jquery-3.3.1.min.js"></script>
-      <script src="js/jquery-ui.1.12.1.js"></script>
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
       <script src="js/bridge.js?v=0043"></script>
       <title>Bridge-Generateur de donnes</title>
    </head>
@@ -334,21 +334,21 @@
             </div>
             <div id="tabs-4">
                <div id="showpbn">
-                  <input title="Affiche la donne au format PBN.(Si la 1ere main n'est pas Nord, mettre au debut du PBN E: pour Est, S: pour Sud, W: pour Ouest, puis cliquer sur PBN)" class="button" name="setpbnbtn" id="setpbnbtn" type="button" onclick="setPbn();" value="PBN">      
+                  <input title="Affiche la donne au format PBN.(Si la 1ere main n'est pas Nord, mettre au debut du PBN E: pour Est, S: pour Sud, W: pour Ouest, puis cliquer sur PBN)" class="button" name="setpbnbtn" id="setpbnbtn" type="button" onclick="setPbn();" value="PBN">
                   <br/>
-                  <input type="text" id="currentpbn" name="currentpbn" placeholder="PBN" size="65"> 
+                  <input type="text" id="currentpbn" name="currentpbn" placeholder="PBN" size="65">
                </div>
             </div>
             <div id="tabs-5">
                <div id="showindex">
                   <input title="Génère la donne associée à l'index." class="button" type="button" name="getfromindexbtn" id="getfromindexbtn" onclick="getFromIndex();" value="Index">
                   <br/>
-                  <input type="text" id="index-donne" name="index-donne" size="65" placeholder="Index de la donne">    
+                  <input type="text" id="index-donne" name="index-donne" size="65" placeholder="Index de la donne">
                </div>
             </div>
             <div id="tabs-6">
                <div id="comm">
-                  <input type="text" id="comment" name="comment" placeholder="Commentaire" size="65">                               
+                  <input type="text" id="comment" name="comment" placeholder="Commentaire" size="65">
                </div>
             </div>
          </div>

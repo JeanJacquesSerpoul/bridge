@@ -3,8 +3,6 @@ package tools
 import (
 	"io"
 	"math"
-	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -66,7 +64,7 @@ func genDistWithPoint(k int) ([]int, []string) {
 	var points int
 	var stemp string
 	var result []string
-	tmask := genereArrayFromList(cardsWithPoints, k)
+	tmask := genereArrayFromList(cardsWithPoints(), k)
 	m := len(tmask)
 	for i := 0; i < m; i++ {
 		mask = tmask[i]
@@ -85,41 +83,11 @@ func genDistWithPoint(k int) ([]int, []string) {
 	return tpoints, result
 }
 
-func genDistWithPointToFile(filepath string, kmin, kmax int) error {
-	var tp, p []int
-	var td, d []string
-	var list []listData
-	for i := kmin; i <= kmax; i++ {
-		p, d = genDistWithPoint(i)
-		tp = appendArray(tp, p)
-		td = appendStrArray(td, d)
-	}
-	list = make([]listData, len(tp))
-	for i := 0; i < len(tp); i++ {
-		list[i].points = tp[i]
-		list[i].dist = td[i]
-	}
-	sort.Slice(list, func(i, j int) bool { return list[i].points < list[j].points })
-	for i := 0; i < len(tp); i++ {
-		tp[i] = list[i].points
-		td[i] = list[i].dist
-	}
-	err := saveGenDistWithPointToTXT(filepath, tp, td)
-	return err
-}
-
-func writeStringToFile(filepath, s string) error {
-	fo, err := os.Create(filepath)
-	if err != nil {
-		return err
-	}
-	defer fo.Close()
-
-	_, err = io.Copy(fo, strings.NewReader(s))
-	return err
-}
-
-func saveGenDistWithPointToTXT(filepath string, points []int, list []string) error {
+func saveGenDistWithPointToTXT(
+	w io.Writer,
+	points []int,
+	list []string,
+) error {
 	s := ""
 	if len(points) > 0 {
 		s = strconv.Itoa(points[0]) + "\t" + list[0]
@@ -127,7 +95,7 @@ func saveGenDistWithPointToTXT(filepath string, points []int, list []string) err
 	for i := 1; i < len(points); i++ {
 		s += "\n" + strconv.Itoa(points[i]) + "\t" + list[i]
 	}
-	err := writeStringToFile(filepath, s)
+	_, err := w.Write([]byte(s))
 	return err
 }
 
