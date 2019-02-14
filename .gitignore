@@ -12,7 +12,5 @@ server/deskserver_linux
 distribution/cover.html
 distribution/data.txt
 data.txt
-tools/data.txt
-server/data.txt
 tools/cover.html
 libdds/dds.dll

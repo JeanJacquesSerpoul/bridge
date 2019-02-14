@@ -1,9 +1,12 @@
 package tools
 
-import "sort"
+import (
+	"io"
+	"sort"
+)
 
 // GenDistWithPointToFile will generate distribution
-func GenDistWithPointToFile(filepath string, kmin, kmax int) error {
+func GenDistWithPointToFile(w io.Writer, kmin, kmax int) error {
 	var tp, p []int
 	var td, d []string
 	var list []listData
@@ -24,6 +27,6 @@ func GenDistWithPointToFile(filepath string, kmin, kmax int) error {
 		tp[i] = list[i].points
 		td[i] = list[i].dist
 	}
-	err := saveGenDistWithPointToTXT(filepath, tp, td)
+	err := saveGenDistWithPointToTXT(w, tp, td)
 	return err
 }

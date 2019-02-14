@@ -201,30 +201,3 @@ func Test_cardLevel(t *testing.T) {
 		})
 	}
 }
-
-func Test_writeStringToFile(t *testing.T) {
-	type args struct {
-		filepath string
-		s        string
-	}
-	tests := []struct {
-		name    string
-		args    args
-		wantErr bool
-	}{
-		{"Test1", args{"t/t.txt", ""}, true},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := writeStringToFile(
-				tt.args.filepath,
-				tt.args.s,
-			); (err != nil) != tt.wantErr {
-				t.Errorf(
-					"writeStringToFile() error = %v, wantErr %v",
-					err, tt.wantErr,
-				)
-			}
-		})
-	}
-}

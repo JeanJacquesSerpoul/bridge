@@ -3,7 +3,6 @@ package tools
 import (
 	"io"
 	"math"
-	"os"
 	"strconv"
 	"strings"
 )
@@ -84,19 +83,8 @@ func genDistWithPoint(k int) ([]int, []string) {
 	return tpoints, result
 }
 
-func writeStringToFile(filepath, s string) error {
-	fo, err := os.Create(filepath)
-	if err != nil {
-		return err
-	}
-	defer fo.Close()
-
-	_, err = io.Copy(fo, strings.NewReader(s))
-	return err
-}
-
 func saveGenDistWithPointToTXT(
-	filepath string,
+	w io.Writer,
 	points []int,
 	list []string,
 ) error {
@@ -107,7 +95,7 @@ func saveGenDistWithPointToTXT(
 	for i := 1; i < len(points); i++ {
 		s += "\n" + strconv.Itoa(points[i]) + "\t" + list[i]
 	}
-	err := writeStringToFile(filepath, s)
+	_, err := w.Write([]byte(s))
 	return err
 }
 
