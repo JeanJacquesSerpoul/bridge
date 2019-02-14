@@ -12,8 +12,8 @@ func GenDistWithPointToFile(w io.Writer, kmin, kmax int) error {
 	var list []listData
 	for i := kmin; i <= kmax; i++ {
 		p, d = genDistWithPoint(i)
-		tp = appendArray(tp, p)
-		td = appendStrArray(td, d)
+		tp = append(tp, p...)
+		td = append(td, d...)
 	}
 	list = make([]listData, len(tp))
 	for i := 0; i < len(tp); i++ {

@@ -88,21 +88,17 @@ func saveGenDistWithPointToTXT(
 	points []int,
 	list []string,
 ) error {
-	s := ""
-	if len(points) > 0 {
-		s = strconv.Itoa(points[0]) + "\t" + list[0]
+	for i, po := range points {
+		if i > 0 {
+			if _, err := w.Write([]byte("\n")); err != nil {
+				return err
+			}
+		}
+		if _, err := w.Write(
+			[]byte(strconv.Itoa(po) + "\t" + list[i]),
+		); err != nil {
+			return err
+		}
 	}
-	for i := 1; i < len(points); i++ {
-		s += "\n" + strconv.Itoa(points[i]) + "\t" + list[i]
-	}
-	_, err := w.Write([]byte(s))
-	return err
-}
-
-func appendStrArray(a, b []string) []string {
-	r := a
-	for i := 0; i < len(b); i++ {
-		r = append(r, b[i])
-	}
-	return r
+	return nil
 }
