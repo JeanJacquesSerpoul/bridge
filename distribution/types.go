@@ -53,3 +53,8 @@ type pointStruct struct {
 	MinPoints   int
 	MaxPoints   int
 }
+
+type listData struct {
+	points int
+	dist   string
+}

@@ -3,7 +3,7 @@ package distribution
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"math"
 	"math/big"
 	"math/rand"
 	"sort"
@@ -76,10 +76,112 @@ A	S	51	12	3	110011	1100	11
 func init() {
 	var err error
 	rand.Seed(time.Now().UnixNano())
-	LoadingData, err = GetDataFile(DATAFILE)
+	LoadingData = genDistWithPointToString(1, 13)
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+func cardsWithPoints() []int {
+	return []int{
+		36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+	}
+}
+
+func genereList(seq []int, k int) []int {
+	var p, s []int
+	var ii, jj uint
+	fmax := math.Exp2((float64)(len(seq))) - 1
+	imax := int(fmax)
+	for i := 0; i <= imax; i++ {
+		s = nil
+		jmax := len(seq) - 1
+		for j := 0; j <= jmax; j++ {
+			ii = uint(i)
+			jj = uint(j)
+			if (ii>>jj)&1 == 1 {
+				s = append(s, seq[j])
+			}
+		}
+		if len(s) == k {
+			p = append(p, s...)
+		}
+	}
+	return p
+}
+
+func genereArrayFromList(seq []int, k int) [][]int {
+	var m int
+	v := genereList(seq, k)
+	m = len(v) / k
+	t := make([][]int, m)
+	for i := 0; i < m; i++ {
+		for j := 0; j < k; j++ {
+			t[i] = append(t[i], v[i*k+j])
+		}
+	}
+	return t
+}
+
+func genDistWithPoint(k int) ([]int, []string) {
+	var mask, tpoints []int
+	var points int
+	var stemp string
+	var result []string
+	tmask := genereArrayFromList(cardsWithPoints(), k)
+	m := len(tmask)
+	for i := 0; i < m; i++ {
+		mask = tmask[i]
+		points = 0
+		for k := 0; k < len(mask); k++ {
+			points += cardLevel(mask[k])
+		}
+		tpoints = append(tpoints, points)
+		stemp = ""
+		for k := 0; k < len(mask); k++ {
+			stemp = stemp + strconv.Itoa(mask[k]) + " "
+		}
+		stemp = strings.TrimSpace(stemp)
+		result = append(result, stemp)
+	}
+	return tpoints, result
+}
+
+func saveGenDistWithPointToString(
+	points []int,
+	list []string,
+) []string {
+	var result []string
+	for i, po := range points {
+
+		result = append(result, strconv.Itoa(po)+"\t"+list[i])
+	}
+	return result
+}
+
+func genDistWithPointToString(kmin, kmax int) []string {
+	var tp, p []int
+	var td, d []string
+	var list []listData
+	for i := kmin; i <= kmax; i++ {
+		p, d = genDistWithPoint(i)
+		tp = append(tp, p...)
+		td = append(td, d...)
+	}
+	list = make([]listData, len(tp))
+	for i := 0; i < len(tp); i++ {
+		list[i].points = tp[i]
+		list[i].dist = td[i]
+	}
+	sort.Slice(list, func(i, j int) bool {
+		return list[i].points < list[j].points
+	})
+	for i := 0; i < len(tp); i++ {
+		tp[i] = list[i].points
+		td[i] = list[i].dist
+	}
+	result := saveGenDistWithPointToString(tp, td)
+	return result
 }
 
 //GetPbnHandsFromPoints ...
@@ -173,7 +275,7 @@ func GetHandsFromPoints(sh ShuffleInterface, c []int) ([]int, error) {
 		return nil, err
 	}
 	for i := 1; i < HC; i++ {
-		v = appendArray(v, hand[ps[i-1].Orientation])
+		v = append(v, hand[ps[i-1].Orientation]...)
 		hand[ps[i].Orientation], err = GetRandomFromData(sh, ps[i].MinPoints, ps[i].MaxPoints, v)
 		if err != nil {
 			return nil, err
@@ -194,16 +296,6 @@ func GetHandsFromPoints(sh ShuffleInterface, c []int) ([]int, error) {
 	return r, nil
 }
 
-//GetDataFile ...
-func GetDataFile(fileName string) ([]string, error) {
-	s, err := ioutil.ReadFile(fileName)
-	if err != nil {
-		return nil, err
-	}
-	st := string(s[:])
-	t := strings.Split(st, NEWLINE)
-	return t, nil
-}
 func loadData(input []string, pMin, pMax int) ([]string, error) {
 	var d, stemp []string
 	var k int
@@ -660,14 +752,6 @@ func fillHand(board []int) []int {
 	return result
 }
 
-func appendArray(a, b []int) []int {
-	r := a
-	for i := 0; i < len(b); i++ {
-		r = append(r, b[i])
-	}
-	return r
-}
-
 //MaskToArray ...
 func MaskToArray(mask string) []int {
 	var hand string
@@ -687,7 +771,7 @@ func MaskToArray(mask string) []int {
 	}
 	for i := 0; i < HC; i++ {
 		hcol[i] = fillHand(hcol[i])
-		r = appendArray(r, hcol[i])
+		r = append(r, hcol[i]...)
 	}
 	return r
 }

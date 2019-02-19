@@ -160,7 +160,7 @@ var mockData = []string{"36", "37", "38", "39", "43", "41", "42", "40", "38 39",
 var mockDataInt = []int{40, 41, 43, 50}
 var mockDataIntNotInList = []int{42, 49}
 
-var cardsWithPoints = []int{36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+//var cardsWithPoints = []int{36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
 
 var mockPointsOk = "-1,-1,-1,-1,-1,-1,-1,-1"
 var mockPointResult = "{\"index\":\"53607499485911673628792160519\",\"pbn\":\"432.432.432.J432 765.765.J765.765 T98.JT98.T98.T98 AKQJ.AKQ.AKQ.AKQ\",\"np\":1,\"ep\":1,\"sp\":1,\"wp\":37}"
@@ -980,38 +980,6 @@ func TestPbnSuitDataGenerateFromJSON(t *testing.T) {
 	}
 }
 
-func Test_loadData(t *testing.T) {
-	type args struct {
-		pMin int
-		pMax int
-	}
-	tests := []struct {
-		name    string
-		args    args
-		want    []string
-		wantErr bool
-	}{
-		{"Test2", args{1, 2}, mockData, false},
-		{"Test3", args{-1, 2}, mockData, true},
-		{"Test4", args{2, 1}, mockData, true},
-	}
-	LoadingData, _ = GetDataFile(DATAFILE)
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := loadData(LoadingData, tt.args.pMin, tt.args.pMax)
-			if tt.wantErr {
-				if err == nil {
-					t.Errorf("Test_loadData() error = %v, wantErr %v", err, tt.wantErr)
-				}
-			} else {
-				if !reflect.DeepEqual(got, tt.want) {
-					t.Errorf("Test_loadData() = %v, want %v", got, tt.want)
-				}
-			}
-		})
-	}
-}
-
 func Test_getRandomFromData(t *testing.T) {
 	type args struct {
 		pMin      int
@@ -1026,7 +994,7 @@ func Test_getRandomFromData(t *testing.T) {
 	}{
 		{"Test1", args{10, 11, mockDataIntNotInList}, mockDataInt, false},
 		{"Test2", args{11, 10, mockDataIntNotInList}, mockDataInt, true},
-		{"Test3", args{10, 11, cardsWithPoints}, mockDataInt, true},
+		{"Test3", args{10, 11, cardsWithPoints()}, mockDataInt, true},
 	}
 	sh := new(fakeRandom)
 	for _, tt := range tests {
@@ -1039,34 +1007,6 @@ func Test_getRandomFromData(t *testing.T) {
 			} else {
 				if !reflect.DeepEqual(got, tt.want) {
 					t.Errorf("Test_getRandomFromData() = %v, want %v", got, tt.want)
-				}
-			}
-		})
-	}
-}
-
-func Test_getDataFile(t *testing.T) {
-	type args struct {
-		fileName string
-	}
-	tests := []struct {
-		name    string
-		args    args
-		want    []string
-		wantErr bool
-	}{
-		{"Test1", args{"t/t.txt"}, mockData, true},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetDataFile(tt.args.fileName)
-			if tt.wantErr {
-				if err == nil {
-					t.Errorf("Test_getDataFile() error = %v, wantErr %v", err, tt.wantErr)
-				}
-			} else {
-				if !reflect.DeepEqual(got, tt.want) {
-					t.Errorf("Test_getDataFile() = %v, want %v", got, tt.want)
 				}
 			}
 		})
