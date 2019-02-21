@@ -218,6 +218,10 @@ var dealSouthOk = "S:T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ 432.432.432.5432 765.765.
 var dealWestOk = "W:AKQJ.AKQ.AKQ.AKQ 432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9"
 var pbnFromDealOk = "432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
 
+var fakePointStruct = []int{0, 0, 0, 0, 0, 0, 0, 0}
+var fakeLoadData = []string{}
+var fake2LoadData = []string{"A\tB"}
+
 //fakeRandom ...
 type fakeRandom struct {
 }
@@ -1117,6 +1121,65 @@ func Test_rotateMask(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := rotateMask(tt.args.pbn); got != tt.want {
 				t.Errorf("rotateMask() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_inputPointsDistToStruct(t *testing.T) {
+	type args struct {
+		input string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    []int
+		wantErr bool
+	}{
+		{"Test1", args{"A,0,0,0,0,0,0,0"}, fakePointStruct, true},
+		{"Test2", args{"0,A,0,0,0,0,0,0"}, fakePointStruct, true},
+		{"Test3", args{"0,0,A,0,0,0,0,0"}, fakePointStruct, true},
+		{"Test4", args{"0,0,0,A,0,0,0,0"}, fakePointStruct, true},
+		{"Test5", args{"0,0,0,0,A,0,0,0"}, fakePointStruct, true},
+		{"Test6", args{"0,0,0,0,0,A,0,0"}, fakePointStruct, true},
+		{"Test7", args{"0,0,0,0,0,0,A,0"}, fakePointStruct, true},
+		{"Test8", args{"0,0,0,0,0,0,0,A"}, fakePointStruct, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := inputPointsDistToStruct(tt.args.input)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("inputPointsDistToStruct() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("inputPointsDistToStruct() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_loadData(t *testing.T) {
+	type args struct {
+		input []string
+		pMin  int
+		pMax  int
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    []string
+		wantErr bool
+	}{
+		{"Test1", args{fakeLoadData, -1, -1}, fakeLoadData, true},
+		{"Test2", args{fake2LoadData, 1, 13}, fakeLoadData, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			_, err := loadData(tt.args.input, tt.args.pMin, tt.args.pMax)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("loadData() error = %v, wantErr %v", err, tt.wantErr)
+				return
 			}
 		})
 	}

@@ -228,10 +228,7 @@ func GetPbnHandsFromPoints(sh ShuffleInterface, input string) (string, error) {
 	s := toPbn(ar)
 	v := boardValueToArray(ar)
 	result := ResultHTTP{Index: ArrayToIndex(ar), Pbn: s, NorthPoint: v[0], EastPoint: v[1], SouthPoint: v[2], WestPoint: v[3]}
-	r, err := json.Marshal(result)
-	if err != nil {
-		return "", err
-	}
+	r, _ := json.Marshal(result)
 	return string(r), nil
 }
 
