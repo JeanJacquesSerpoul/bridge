@@ -74,12 +74,8 @@ A	S	51	12	3	110011	1100	11
 
 */
 func init() {
-	var err error
 	rand.Seed(time.Now().UnixNano())
 	LoadingData = genDistWithPointToString(1, 13)
-	if err != nil {
-		fmt.Println(err)
-	}
 }
 
 func cardsWithPoints() []int {
