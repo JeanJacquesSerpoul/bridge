@@ -235,7 +235,7 @@ func GetPbnHandsFromPoints(sh ShuffleInterface, input string) (string, error) {
 //GetHandsFromPoints ...
 func GetHandsFromPoints(sh ShuffleInterface, c []int) ([]int, error) {
 	var v, r []int
-	var hand [4][]int
+	var hand [HC][]int
 	var err error
 	mask := make([]int, DC)
 	ps := make([]pointStruct, HC)
