@@ -9,9 +9,6 @@ const BOARDMINUSHAND = 3
 //LoadingData ...
 var LoadingData []string
 
-//DATAFILE ...
-const DATAFILE = "data.txt"
-
 //TAB ...
 const TAB = "\t"
 
