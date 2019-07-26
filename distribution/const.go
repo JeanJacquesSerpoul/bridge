@@ -18,6 +18,9 @@ const NEWLINE = "\n"
 //MAXPOINTSINHAND ...
 const MAXPOINTSINHAND = 37
 
+//MINPOINTSINHAND ...
+const MINPOINTSINHAND = 0
+
 //NBPC 8 points constraints
 var NBPC = 8
 

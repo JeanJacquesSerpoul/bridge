@@ -203,16 +203,16 @@ func GetPbnHandsFromPoints(sh ShuffleInterface, input string) (string, error) {
 	}
 
 	if c[0] == NOPOINT {
-		c[0] = 0
+		c[0] = MINPOINTSINHAND
 	}
 	if c[2] == NOPOINT {
-		c[2] = 0
+		c[2] = MINPOINTSINHAND
 	}
 	if c[4] == NOPOINT {
-		c[4] = 0
+		c[4] = MINPOINTSINHAND
 	}
 	if c[6] == NOPOINT {
-		c[6] = 0
+		c[6] = MINPOINTSINHAND
 	}
 
 	for i := 0; i < MAXTRY; i++ {
