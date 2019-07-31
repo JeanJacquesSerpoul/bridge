@@ -299,11 +299,7 @@ func loadData(input []string, pMin, pMax int) ([]string, error) {
 	if pMin > pMax {
 		return nil, fmt.Errorf(ErrMsg["pmin_more_than_pmax"])
 	}
-	// Select Random value beetween pmin and pmax
-	m := shuffleInterval(pMin, pMax)
-	pMin = m
-	pMax = m
-	//
+
 	for i := 0; i < len(input); i++ {
 		stemp = strings.Split(input[i], TAB)
 		k, err = strconv.Atoi(stemp[0])
@@ -349,6 +345,11 @@ func GetRandomFromData(sh ShuffleInterface, pMin, pMax int, notInList []int) ([]
 	var list, atemp []int
 	var r string
 	var v []string
+	// Select Random value beetween pmin and pmax
+	m := shuffleInterval(sh, pMin, pMax)
+	pMin = m
+	pMax = m
+	//
 	s, err := loadData(LoadingData, pMin, pMax)
 	if err != nil {
 		return nil, err
@@ -693,14 +694,13 @@ func randomSuitsToArraySuits(s ShuffleInterface) handSuit {
 	}
 	return v
 }
-func shuffleInterval(min, max int) int {
+func shuffleInterval(sh ShuffleInterface, min, max int) int {
 	var t []int
 	for i := min; i <= max; i++ {
 		t = append(t, i)
 	}
-	l := max - min + 1
-	r := rand.Intn(l)
-	return (t[r])
+	tab := shuffle(sh, t)
+	return (tab[0])
 }
 
 //Shuffle ...
