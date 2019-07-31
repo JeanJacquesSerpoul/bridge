@@ -299,6 +299,11 @@ func loadData(input []string, pMin, pMax int) ([]string, error) {
 	if pMin > pMax {
 		return nil, fmt.Errorf(ErrMsg["pmin_more_than_pmax"])
 	}
+	// Select Random value beetween pmin and pmax
+	m := shuffleInterval(pMin, pMax)
+	pMin = m
+	pMax = m
+	//
 	for i := 0; i < len(input); i++ {
 		stemp = strings.Split(input[i], TAB)
 		k, err = strconv.Atoi(stemp[0])
@@ -687,6 +692,15 @@ func randomSuitsToArraySuits(s ShuffleInterface) handSuit {
 		}
 	}
 	return v
+}
+func shuffleInterval(min, max int) int {
+	var t []int
+	for i := min; i <= max; i++ {
+		t = append(t, i)
+	}
+	l := max - min + 1
+	r := rand.Intn(l)
+	return (t[r])
 }
 
 //Shuffle ...
