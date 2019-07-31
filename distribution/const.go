@@ -6,9 +6,6 @@ const FIRSTHANDSEPARATOR = ":"
 //BOARDMINUSHAND ...
 const BOARDMINUSHAND = 3
 
-//LoadingData ...
-var LoadingData []string
-
 //TAB ...
 const TAB = "\t"
 

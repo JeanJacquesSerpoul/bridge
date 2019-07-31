@@ -75,7 +75,6 @@ A	S	51	12	3	110011	1100	11
 */
 func init() {
 	rand.Seed(time.Now().UnixNano())
-	LoadingData = genDistWithPointToString(1, 13)
 }
 
 func cardsWithPoints() []int {
@@ -289,23 +288,12 @@ func GetHandsFromPoints(sh ShuffleInterface, c []int) ([]int, error) {
 	return r, nil
 }
 
-func loadData(input []string, pMin, pMax int) ([]string, error) {
+func loadData(input []string, pMin, pMax int) []string {
 	var d, stemp []string
 	var k int
-	var err error
-	if pMin < 0 || pMax < 0 || pMin > MAXPOINTSINHAND || pMax > MAXPOINTSINHAND {
-		return nil, fmt.Errorf(ErrMsg["points_beetween_0_and_37"])
-	}
-	if pMin > pMax {
-		return nil, fmt.Errorf(ErrMsg["pmin_more_than_pmax"])
-	}
-
 	for i := 0; i < len(input); i++ {
 		stemp = strings.Split(input[i], TAB)
-		k, err = strconv.Atoi(stemp[0])
-		if err != nil {
-			return nil, err
-		}
+		k, _ = strconv.Atoi(stemp[0])
 		if k > pMax {
 			break
 		}
@@ -314,7 +302,7 @@ func loadData(input []string, pMin, pMax int) ([]string, error) {
 		}
 	}
 
-	return d, err
+	return d
 }
 func checkList(list, notInList []int) bool {
 	for i := 0; i < len(list); i++ {
@@ -345,15 +333,17 @@ func GetRandomFromData(sh ShuffleInterface, pMin, pMax int, notInList []int) ([]
 	var list, atemp []int
 	var r string
 	var v []string
+
 	// Select Random value beetween pmin and pmax
-	m := shuffleInterval(sh, pMin, pMax)
-	pMin = m
-	pMax = m
-	//
-	s, err := loadData(LoadingData, pMin, pMax)
+	m, err := shuffleInterval(sh, pMin, pMax)
 	if err != nil {
 		return nil, err
 	}
+	pMin = m
+	pMax = m
+	//
+
+	s := loadData(genDistWithPointToString(1, HCC), pMin, pMax)
 	if s == nil {
 		return nil, nil
 	}
@@ -694,13 +684,19 @@ func randomSuitsToArraySuits(s ShuffleInterface) handSuit {
 	}
 	return v
 }
-func shuffleInterval(sh ShuffleInterface, min, max int) int {
+func shuffleInterval(sh ShuffleInterface, min, max int) (int, error) {
 	var t []int
+	if min < 0 || max < 0 || min > MAXPOINTSINHAND || max > MAXPOINTSINHAND {
+		return -1, fmt.Errorf(ErrMsg["points_beetween_0_and_37"])
+	}
+	if min > max {
+		return -1, fmt.Errorf(ErrMsg["pmin_more_than_pmax"])
+	}
 	for i := min; i <= max; i++ {
 		t = append(t, i)
 	}
 	tab := shuffle(sh, t)
-	return (tab[0])
+	return tab[0], nil
 }
 
 //Shuffle ...
