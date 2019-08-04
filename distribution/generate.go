@@ -75,7 +75,6 @@ A	S	51	12	3	110011	1100	11
 */
 func init() {
 	rand.Seed(time.Now().UnixNano())
-	LoadingData = genDistWithPointToString(1, 13)
 }
 
 func cardsWithPoints() []int {
@@ -214,9 +213,9 @@ func GetPbnHandsFromPoints(sh ShuffleInterface, input string) (string, error) {
 	if c[6] == NOPOINT {
 		c[6] = MINPOINTSINHAND
 	}
-
+	loadingData := genDistWithPointToString(1, HCC)
 	for i := 0; i < MAXTRY; i++ {
-		ar, err = GetHandsFromPoints(sh, c)
+		ar, err = GetHandsFromPoints(sh, c, loadingData)
 		if err == nil {
 			break
 		}
@@ -233,7 +232,7 @@ func GetPbnHandsFromPoints(sh ShuffleInterface, input string) (string, error) {
 }
 
 //GetHandsFromPoints ...
-func GetHandsFromPoints(sh ShuffleInterface, c []int) ([]int, error) {
+func GetHandsFromPoints(sh ShuffleInterface, c []int, loadingData []string) ([]int, error) {
 	var v, r []int
 	var hand [HC][]int
 	var err error
@@ -263,13 +262,13 @@ func GetHandsFromPoints(sh ShuffleInterface, c []int) ([]int, error) {
 	if DP-ps[2].MinPoints-ps[1].MinPoints < ps[3].MaxPoints {
 		ps[3].MaxPoints = ps[3].MaxPoints - ps[2].MinPoints - ps[1].MinPoints - ps[0].MinPoints + BOARDMINUSHAND
 	}
-	hand[ps[0].Orientation], err = GetRandomFromData(sh, ps[0].MinPoints, ps[0].MaxPoints, nil)
+	hand[ps[0].Orientation], err = GetRandomFromData(sh, loadingData, ps[0].MinPoints, ps[0].MaxPoints, nil)
 	if err != nil {
 		return nil, err
 	}
 	for i := 1; i < HC; i++ {
 		v = append(v, hand[ps[i-1].Orientation]...)
-		hand[ps[i].Orientation], err = GetRandomFromData(sh, ps[i].MinPoints, ps[i].MaxPoints, v)
+		hand[ps[i].Orientation], err = GetRandomFromData(sh, loadingData, ps[i].MinPoints, ps[i].MaxPoints, v)
 		if err != nil {
 			return nil, err
 		}
@@ -335,7 +334,7 @@ func atoiArray(s []string) ([]int, error) {
 }
 
 //GetRandomFromData ...
-func GetRandomFromData(sh ShuffleInterface, pMin, pMax int, notInList []int) ([]int, error) {
+func GetRandomFromData(sh ShuffleInterface, loadingData []string, pMin, pMax int, notInList []int) ([]int, error) {
 	var list, atemp []int
 	var r string
 	var v []string
@@ -350,7 +349,7 @@ func GetRandomFromData(sh ShuffleInterface, pMin, pMax int, notInList []int) ([]
 	pMin = m
 	pMax = m
 	//
-	s, err := loadData(LoadingData, pMin, pMax)
+	s, err := loadData(loadingData, pMin, pMax)
 	if s == nil {
 		return nil, nil
 	}

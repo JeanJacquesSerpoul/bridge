@@ -1002,9 +1002,10 @@ func Test_getRandomFromData(t *testing.T) {
 		{"Test4", args{10, 11, cardsWithPoints()}, mockDataInt, true},
 	}
 	sh := new(fakeRandom)
+	loadingData := genDistWithPointToString(1, HCC)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetRandomFromData(sh, tt.args.pMin, tt.args.pMax, tt.args.notInList)
+			got, err := GetRandomFromData(sh, loadingData, tt.args.pMin, tt.args.pMax, tt.args.notInList)
 			if tt.wantErr {
 				if err == nil {
 					t.Errorf("Test_getRandomFromData() error = %v, wantErr %v", err, tt.wantErr)
