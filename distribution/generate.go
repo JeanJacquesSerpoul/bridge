@@ -293,12 +293,6 @@ func loadData(input []string, pMin, pMax int) ([]string, error) {
 	var d, stemp []string
 	var k int
 	var err error
-	if pMin < 0 || pMax < 0 || pMin > MAXPOINTSINHAND || pMax > MAXPOINTSINHAND {
-		return nil, fmt.Errorf(ErrMsg["points_beetween_0_and_37"])
-	}
-	if pMin > pMax {
-		return nil, fmt.Errorf(ErrMsg["pmin_more_than_pmax"])
-	}
 
 	for i := 0; i < len(input); i++ {
 		stemp = strings.Split(input[i], TAB)
@@ -345,15 +339,18 @@ func GetRandomFromData(sh ShuffleInterface, pMin, pMax int, notInList []int) ([]
 	var list, atemp []int
 	var r string
 	var v []string
+	if pMin < 0 || pMax < 0 || pMin > MAXPOINTSINHAND || pMax > MAXPOINTSINHAND {
+		return nil, fmt.Errorf(ErrMsg["points_beetween_0_and_37"])
+	}
+	if pMin > pMax {
+		return nil, fmt.Errorf(ErrMsg["pmin_more_than_pmax"])
+	}
 	// Select Random value beetween pmin and pmax
 	m := shuffleInterval(sh, pMin, pMax)
 	pMin = m
 	pMax = m
 	//
 	s, err := loadData(LoadingData, pMin, pMax)
-	if err != nil {
-		return nil, err
-	}
 	if s == nil {
 		return nil, nil
 	}
@@ -365,10 +362,7 @@ func GetRandomFromData(sh ShuffleInterface, pMin, pMax int, notInList []int) ([]
 	for i := 0; i < len(random); i++ {
 		r = s[random[i]]
 		v = strings.Split(r, SPACE)
-		atemp, err = atoiArray(v)
-		if err != nil {
-			return nil, err
-		}
+		atemp, _ = atoiArray(v)
 		if checkList(atemp, notInList) {
 			return atemp, nil
 		}

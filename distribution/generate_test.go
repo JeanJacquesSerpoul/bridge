@@ -163,7 +163,7 @@ var mockDataIntNotInList = []int{42, 49}
 //var cardsWithPoints = []int{36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
 
 var mockPointsOk = "-1,-1,-1,-1,-1,-1,-1,-1"
-var mockPointResult = "{\"index\":\"53607499485911673628792160519\",\"pbn\":\"432.432.432.J432 765.765.J765.765 T98.JT98.T98.T98 AKQJ.AKQ.AKQ.AKQ\",\"np\":1,\"ep\":1,\"sp\":1,\"wp\":37}"
+var mockPointResult = "{\"index\":\"53607499485911673692344531919\",\"pbn\":\"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ\",\"np\":0,\"ep\":0,\"sp\":3,\"wp\":37}"
 var mockPointsNotOk = "0,0,0,0,0,0"
 
 var mockPointsNotOk2 = "32,8,0,0,0,0,0,0"
@@ -195,21 +195,21 @@ var jsHTTPPointNotOk = `{
 	"vulnerable":"ALL"
 }`
 
-var mockJSONPointResult = `% Index: 53607499485911673628792160519
+var mockJSONPointResult = `% Index: 53607499485911673692344531919
 [Dealer "N"]
 [Vulnerable "ALL"]
-[Deal "N:432.432.432.J432 765.765.J765.765 T98.JT98.T98.T98 AKQJ.AKQ.AKQ.AKQ"]
+[Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
 
 `
-var mockJSONPointLimitResult = `% Index: 53607499485911673628792160519
+var mockJSONPointLimitResult = `% Index: 53607499485911673692344531919
 [Dealer "N"]
 [Vulnerable "ALL"]
-[Deal "N:432.432.432.J432 765.765.J765.765 T98.JT98.T98.T98 AKQJ.AKQ.AKQ.AKQ"]
+[Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
 
-% Index: 53607499485911673628792160519
+% Index: 53607499485911673692344531919
 [Dealer "N"]
 [Vulnerable "ALL"]
-[Deal "N:432.432.432.J432 765.765.J765.765 T98.JT98.T98.T98 AKQJ.AKQ.AKQ.AKQ"]
+[Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
 
 `
 var dealNorthOk = "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
@@ -998,7 +998,8 @@ func Test_getRandomFromData(t *testing.T) {
 	}{
 		{"Test1", args{10, 11, mockDataIntNotInList}, mockDataInt, false},
 		{"Test2", args{11, 10, mockDataIntNotInList}, mockDataInt, true},
-		{"Test3", args{10, 11, cardsWithPoints()}, mockDataInt, true},
+		{"Test3", args{-1, -1, mockDataIntNotInList}, mockDataInt, true},
+		{"Test4", args{10, 11, cardsWithPoints()}, mockDataInt, true},
 	}
 	sh := new(fakeRandom)
 	for _, tt := range tests {
@@ -1171,8 +1172,7 @@ func Test_loadData(t *testing.T) {
 		want    []string
 		wantErr bool
 	}{
-		{"Test1", args{fakeLoadData, -1, -1}, fakeLoadData, true},
-		{"Test2", args{fake2LoadData, 1, 13}, fakeLoadData, true},
+		{"Test1", args{fake2LoadData, 1, 13}, fakeLoadData, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
