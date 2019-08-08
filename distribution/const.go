@@ -21,8 +21,8 @@ const MINPOINTSINHAND = 0
 //NBPC 8 points constraints
 var NBPC = 8
 
-//MAXPBNGENERATION Arbitrary limit
-const MAXPBNGENERATION = 10000
+//MaxPbnGeneration Arbitrary limit
+var MaxPbnGeneration = 10000
 
 // COMMA separator for suits distribution input
 const COMMA = ","

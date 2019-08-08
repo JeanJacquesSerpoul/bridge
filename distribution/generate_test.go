@@ -696,7 +696,7 @@ func TestPbnGenerateFromJSON(t *testing.T) {
 		{"Test4", args{jsHTTPNotMaskOk}, jsResultHTTPOk, true},
 	}
 	sh := new(fakeRandom)
-	getMaxPbnGeneration(2) // Less time for running test
+	MaxPbnGeneration = 2 // Less time for running test
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := PbnDataGenerateFromJSON(sh, tt.args.js)
@@ -966,7 +966,7 @@ func TestPbnSuitDataGenerateFromJSON(t *testing.T) {
 		{"Test5", args{jsHTTPSuitCommentOk}, jsResultCommentHTTPOk, false},
 	}
 	sh := new(fakeRandom)
-	getMaxPbnGeneration(2) // Less time for running test
+	MaxPbnGeneration = 2 // Less time for running test
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := PbnSuitDataGenerateFromJSON(sh, tt.args.input)
@@ -1065,7 +1065,7 @@ func TestPbnPointDataGenerateFromJSON(t *testing.T) {
 		{"Test3", args{jsHTTPPointOkLimit}, mockJSONPointLimitResult, false},
 	}
 	sh := new(fakeRandom)
-	getMaxPbnGeneration(2) // Less time for running test
+	MaxPbnGeneration = 2 // Less time for running test
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := PbnPointDataGenerateFromJSON(sh, tt.args.js)
