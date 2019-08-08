@@ -77,6 +77,10 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
+func getMaxPbnGeneration(n int) int {
+	return n
+}
+
 func cardsWithPoints() []int {
 	return []int{
 		36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
@@ -1056,8 +1060,8 @@ func PbnSuitDataGenerateFromJSON(sh ShuffleInterface, js string) (string, error)
 	d.Vulnerable = parameters.Vulnerable
 	d.Comment = parameters.Comment
 	mask := parameters.Mask
-	if parameters.Count > MaxPbnGeneration {
-		parameters.Count = MaxPbnGeneration
+	if parameters.Count > getMaxPbnGeneration(MAXPBNGENERATION) {
+		parameters.Count = getMaxPbnGeneration(MAXPBNGENERATION)
 	}
 	for i := 0; i < parameters.Count; i++ {
 		t, err = PbnAndIndexGenerateFromSuits(sh, mask)
@@ -1088,8 +1092,8 @@ func PbnPointDataGenerateFromJSON(sh ShuffleInterface, js string) (string, error
 	d.Vulnerable = parameters.Vulnerable
 	d.Comment = parameters.Comment
 	mask := parameters.Mask
-	if parameters.Count > MaxPbnGeneration {
-		parameters.Count = MaxPbnGeneration
+	if parameters.Count > getMaxPbnGeneration(MAXPBNGENERATION) {
+		parameters.Count = getMaxPbnGeneration(MAXPBNGENERATION)
 	}
 	for i := 0; i < parameters.Count; i++ {
 		t, err = GetPbnHandsFromPoints(sh, mask)
@@ -1120,8 +1124,8 @@ func PbnDataGenerateFromJSON(sh ShuffleInterface, js string) (string, error) {
 	d.Vulnerable = parameters.Vulnerable
 	d.Comment = parameters.Comment
 	mask := parameters.Mask
-	if parameters.Count > MaxPbnGeneration {
-		parameters.Count = MaxPbnGeneration
+	if parameters.Count > getMaxPbnGeneration(MAXPBNGENERATION) {
+		parameters.Count = getMaxPbnGeneration(MAXPBNGENERATION)
 	}
 	for i := 0; i < parameters.Count; i++ {
 		t, err = PbnAndIndexGenerateFromMask(sh, nil, mask)
