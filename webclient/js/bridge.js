@@ -304,12 +304,23 @@ function razPar() {
 	$("#nd").text("");
 	$("#nc").text("");
 
+	$("#snt").text("");
+	$("#ss").text("");
+	$("#sh").text("");
+	$("#sd").text("");
+	$("#sc").text("");
 
 	$("#ent").text("");
 	$("#es").text("");
 	$("#eh").text("");
 	$("#ed").text("");
 	$("#ec").text("");
+
+	$("#wnt").text("");
+	$("#ws").text("");
+	$("#wh").text("");
+	$("#wd").text("");
+	$("#wc").text("");
 
 }
 
@@ -530,11 +541,23 @@ function calcPar() {
 					$("#nd").text(result.nd);
 					$("#nc").text(result.nc);
 
+					$("#snt").text(result.snt);
+					$("#ss").text(result.ss);
+					$("#sh").text(result.sh);
+					$("#sd").text(result.sd);
+					$("#sc").text(result.sc);
+
 					$("#ent").text(result.ent);
 					$("#es").text(result.es);
 					$("#eh").text(result.eh);
 					$("#ed").text(result.ed);
 					$("#ec").text(result.ec);
+
+					$("#wnt").text(result.wnt);
+					$("#ws").text(result.ws);
+					$("#wh").text(result.wh);
+					$("#wd").text(result.wd);
+					$("#wc").text(result.wc);
 
 				}
 			},
