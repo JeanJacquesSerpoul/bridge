@@ -121,15 +121,6 @@ input[type=button]:disabled {
     border-color: gray;
 }
 
-#masque {
-    text-align: center;
-    width: 525px;
-}
-
-#masque table {
-    margin-left: 70px;
-}
-
 #showpar table thead{
     background-color: lightgrey;
 }

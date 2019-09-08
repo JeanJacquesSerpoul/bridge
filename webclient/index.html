@@ -4,11 +4,11 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=0.9">
       <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet'>
-      <link rel="stylesheet" href="css/bridge.css?v=0069"/>
+      <link rel="stylesheet" href="css/bridge.css?v=0070"/>
       <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-      <script src="js/bridge.js?v=0045"></script>
+      <script src="js/bridge.js?v=0053"></script>
       <title>Bridge-Generateur de donnes</title>
    </head>
    <body>
@@ -35,6 +35,10 @@
                <div class="cardscontainer">
                   <div id="np" class="cards points"></div>
                </div>
+               <div class="cardscontainer">
+                  <input type="checkbox" name="h-n" id="h-n" onclick="viewHand('N');" value="1" checked>
+               </div>
+
             </td>
             <td></td>
          </tr>
@@ -59,6 +63,10 @@
                <div class="cardscontainer">
                   <div id="wp" class="cards  points"></div>
                </div>
+               <div class="cardscontainer">
+                  <input type="checkbox" name="h-w" id="h-w" onclick="viewHand('W');" value="1" checked>
+               </div>
+
             </td>
             <td>
                <span id="vuldeal">
@@ -99,6 +107,10 @@
                <div class="cardscontainer">
                   <div id="ep" class="cards  points"></div>
                </div>
+               <div class="cardscontainer">
+                  <input type="checkbox" name="h-e" id="h-e" onclick="viewHand('E');" value="1" checked>
+               </div>
+
             </td>
          </tr>
          <tr>
@@ -123,6 +135,10 @@
                <div class="cardscontainer">
                   <div id="sp" class="cards  points"></div>
                </div>
+               <div class="cardscontainer">
+                  <input type="checkbox" name="h-s" id="h-s" onclick="viewHand('S');" value="1" checked>
+               </div>
+
             </td>
             <td></td>
          </tr>
@@ -134,36 +150,18 @@
             </td>
          </tr>
       </table>
-      <div id="masque">
-         <table >
-            <tr>
-               <td></td>
-               <td>Nord</td>
-               <td>Est</td>
-               <td>Sud</td>
-               <td>Ouest</td>
-            </tr>
-            <tr>
-               <td>Masquer</td>
-               <td><input type="checkbox" name="h-n" id="h-n" onclick="viewHand('N');" value="1"></td>
-               <td><input type="checkbox" name="h-e" id="h-e" onclick="viewHand('E');" value="1"></td>
-               <td><input type="checkbox" name="h-s" id="h-s" onclick="viewHand('S');" value="1"></td>
-               <td><input type="checkbox" name="h-w" id="h-w" onclick="viewHand('W');" value="1"></td>
-            </tr>
-         </table>
-      </div>
       <div id="showpar">
          <table>
             <thead>
                <tr>
-                  <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PAR et nombre de levees potentielles de la donne affichee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PAR de la donne affichee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                </tr>
             </thead>
             <tr>
                <td colspan="6"><span id="showscore">&nbsp;</span></td>
             </tr>
             <tr>
-               <td>Levees</td>
+               <td>Contrats</td>
                <td>Piques</td>
                <td>Coeur</td>
                <td>Carreau</td>

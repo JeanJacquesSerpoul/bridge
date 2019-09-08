@@ -21,6 +21,7 @@ function translateScore(s) {
 	s = s.replace(/D/gi, "K").trim();
 	s = s.replace(/C/gi, "T").trim();
 	s = s.replace(/H/gi, "C").trim();
+	s = s.replace(/W/gi, "O").trim();
 	s = s.replace(/N/gi, "SA").trim();
 	s = s.replace(/EW/gi, "EO").trim();
 	s = s.replace(/xxx/gi, "NS").trim();
@@ -509,6 +510,15 @@ function getIdemList(result) {
 	return s1
 }
 
+function setContract(nbTricks) {
+	var levelContract= 6
+	var r = nbTricks - levelContract
+	if (r <= 0) {
+		return "-"
+	} 
+	return r
+}
+
 function calcPar() {
 	if ($("#okpbn").text() == "Y") {
 		initCalc();
@@ -527,6 +537,7 @@ function calcPar() {
 					var result = jQuery.parseJSON(data);
 					var idem = getIdemList(result)
 					var par = ""
+					va = 6
 					if (idem == "") {
 						var h = result.nsl.split(":");
 						par = "Points " + result.nss + " " + result.ews.replace(/EW/gi, "EO").trim() + " Contrats " + translateScore(h[1]);
@@ -535,29 +546,29 @@ function calcPar() {
 						par = "Points " + result.nss + " " + result.ews.replace(/EW/gi, "EO").trim() + " Contrats " + translateScore(result.nsl) + " " + idem;
 					}
 					$("#showscore").text(par);
-					$("#nnt").text(result.nnt);
-					$("#ns").text(result.ns);
-					$("#nh").text(result.nh);
-					$("#nd").text(result.nd);
-					$("#nc").text(result.nc);
+					$("#nnt").text(setContract(result.nnt));
+					$("#ns").text(setContract(result.ns));
+					$("#nh").text(setContract(result.nh));
+					$("#nd").text(setContract(result.nd));
+					$("#nc").text(setContract(result.nc));
 
-					$("#snt").text(result.snt);
-					$("#ss").text(result.ss);
-					$("#sh").text(result.sh);
-					$("#sd").text(result.sd);
-					$("#sc").text(result.sc);
+					$("#snt").text(setContract(result.snt));
+					$("#ss").text(setContract(result.ss));
+					$("#sh").text(setContract(result.sh));
+					$("#sd").text(setContract(result.sd));
+					$("#sc").text(setContract(result.sc));
 
-					$("#ent").text(result.ent);
-					$("#es").text(result.es);
-					$("#eh").text(result.eh);
-					$("#ed").text(result.ed);
-					$("#ec").text(result.ec);
+					$("#ent").text(setContract(result.ent));
+					$("#es").text(setContract(result.es));
+					$("#eh").text(setContract(result.eh));
+					$("#ed").text(setContract(result.ed));
+					$("#ec").text(setContract(result.ec));
 
-					$("#wnt").text(result.wnt);
-					$("#ws").text(result.ws);
-					$("#wh").text(result.wh);
-					$("#wd").text(result.wd);
-					$("#wc").text(result.wc);
+					$("#wnt").text(setContract(result.wnt));
+					$("#ws").text(setContract(result.ws));
+					$("#wh").text(setContract(result.wh));
+					$("#wd").text(setContract(result.wd));
+					$("#wc").text(setContract(result.wc));
 
 				}
 			},
@@ -662,42 +673,42 @@ function retValue(t) {
 	return r
 }
 
-function setNotVisible(v, a) {
+function setVisible(v, a) {
 	if (a) {
-		$(v).hide();
-	} else {
 		$(v).show();
+	} else {
+		$(v).hide();
 	}
 }
 
 function viewHand(hand) {
 	if (hand == "N") {
-		setNotVisible("#north-spade", ($("#h-n").is(':checked')));
-		setNotVisible("#north-heart", ($("#h-n").is(':checked')));
-		setNotVisible("#north-diamond", ($("#h-n").is(':checked')));
-		setNotVisible("#north-club", ($("#h-n").is(':checked')));
-		setNotVisible("#np", ($("#h-n").is(':checked')));
+		setVisible("#north-spade", ($("#h-n").is(':checked')));
+		setVisible("#north-heart", ($("#h-n").is(':checked')));
+		setVisible("#north-diamond", ($("#h-n").is(':checked')));
+		setVisible("#north-club", ($("#h-n").is(':checked')));
+		setVisible("#np", ($("#h-n").is(':checked')));
 	}
 	if (hand == "E") {
-		setNotVisible("#east-spade", ($("#h-e").is(':checked')));
-		setNotVisible("#east-heart", ($("#h-e").is(':checked')));
-		setNotVisible("#east-diamond", ($("#h-e").is(':checked')));
-		setNotVisible("#east-club", ($("#h-e").is(':checked')));
-		setNotVisible("#ep", ($("#h-e").is(':checked')));
+		setVisible("#east-spade", ($("#h-e").is(':checked')));
+		setVisible("#east-heart", ($("#h-e").is(':checked')));
+		setVisible("#east-diamond", ($("#h-e").is(':checked')));
+		setVisible("#east-club", ($("#h-e").is(':checked')));
+		setVisible("#ep", ($("#h-e").is(':checked')));
 	}
 	if (hand == "S") {
-		setNotVisible("#south-spade", ($("#h-s").is(':checked')));
-		setNotVisible("#south-heart", ($("#h-s").is(':checked')));
-		setNotVisible("#south-diamond", ($("#h-s").is(':checked')));
-		setNotVisible("#south-club", ($("#h-s").is(':checked')));
-		setNotVisible("#sp", ($("#h-s").is(':checked')));
+		setVisible("#south-spade", ($("#h-s").is(':checked')));
+		setVisible("#south-heart", ($("#h-s").is(':checked')));
+		setVisible("#south-diamond", ($("#h-s").is(':checked')));
+		setVisible("#south-club", ($("#h-s").is(':checked')));
+		setVisible("#sp", ($("#h-s").is(':checked')));
 	}
 	if (hand == "W") {
-		setNotVisible("#west-spade", ($("#h-w").is(':checked')));
-		setNotVisible("#west-heart", ($("#h-w").is(':checked')));
-		setNotVisible("#west-diamond", ($("#h-w").is(':checked')));
-		setNotVisible("#west-club", ($("#h-w").is(':checked')));
-		setNotVisible("#wp", ($("#h-w").is(':checked')));
+		setVisible("#west-spade", ($("#h-w").is(':checked')));
+		setVisible("#west-heart", ($("#h-w").is(':checked')));
+		setVisible("#west-diamond", ($("#h-w").is(':checked')));
+		setVisible("#west-club", ($("#h-w").is(':checked')));
+		setVisible("#wp", ($("#h-w").is(':checked')));
 	}
 
 }
