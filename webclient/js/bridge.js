@@ -289,7 +289,6 @@ function pbn() {
 		});
 	}
 
-
 }
 
 
@@ -511,11 +510,11 @@ function getIdemList(result) {
 }
 
 function setContract(nbTricks) {
-	var levelContract= 6
+	var levelContract = 6
 	var r = nbTricks - levelContract
 	if (r <= 0) {
 		return "-"
-	} 
+	}
 	return r
 }
 
@@ -584,7 +583,7 @@ function calcPar() {
 }
 
 function generate() {
-	if (activeTabs() >= 3) {
+	if (activeTabs() >= 5) {
 		return;
 	}
 	initCalc();
@@ -655,6 +654,14 @@ function generate() {
 			}
 		});
 	}
+	if (activeTabs() == 3) {
+		setPbn();
+	}
+	if (activeTabs() == 4) {
+		getFromIndex();
+	}
+
+
 }
 
 function activeTabs() {
