@@ -346,7 +346,7 @@ func GetRandomFromData(sh ShuffleInterface, loadingData []string, pMin, pMax int
 	pMin = m
 	pMax = m
 	//
-	s, err := loadData(loadingData, pMin, pMax)
+	s, _ := loadData(loadingData, pMin, pMax)
 	if s == nil {
 		return nil, nil
 	}
@@ -363,7 +363,7 @@ func GetRandomFromData(sh ShuffleInterface, loadingData []string, pMin, pMax int
 			return atemp, nil
 		}
 	}
-	err = fmt.Errorf(ErrMsg["error_in_getRandomFromData"])
+	err := fmt.Errorf(ErrMsg["error_in_getRandomFromData"])
 	return nil, err
 }
 
@@ -695,9 +695,7 @@ func shuffleInterval(sh ShuffleInterface, min, max int) int {
 //Shuffle ...
 func shuffle(sh ShuffleInterface, content []int) []int {
 	tabCopy := make([]int, len(content))
-	for i, scontent := range content {
-		tabCopy[i] = scontent
-	}
+	copy(tabCopy, content)
 	tab := sh.fYShuffle(len(content))
 	for i, scontent := range content {
 		tabCopy[tab[i]] = scontent
@@ -737,9 +735,7 @@ func shuffleHand(sh ShuffleInterface, arrayOfSuit []int, mask string) ([]int, er
 
 func fillHand(board []int) []int {
 	result := make([]int, HCC)
-	for i, vboard := range board {
-		result[i] = vboard
-	}
+	copy(result, board)
 	for i := len(board); i < HCC; i++ {
 		result[i] = NOCARD
 	}
@@ -886,7 +882,7 @@ func shuffleRemainHands(sh ShuffleInterface, arrayOfSuit, arrayOfPoint []int, ta
 			j = 0
 			remain = nil
 			newpos = nil
-			for i, _ := range r {
+			for i := range r {
 				r[i] = NOCARD
 			}
 			for i, vtabMask := range tabMask {
