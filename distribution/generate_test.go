@@ -156,7 +156,6 @@ var resultSuitOk2 = "{\"index\":\"52686974512864668390811270149\",\"pbn\":\"8765
 var resultSuitOk3 = "{\"index\":\"50489164962052643089238898166\",\"pbn\":\"QJT98765432.JT.. .98765432.KQ.AQT .Q.T98765432.KJ9 AK.AK.AJ.8765432\",\"np\":4,\"ep\":11,\"sp\":6,\"wp\":19}"
 var resultSuitOk4 = "{\"index\":\"53607499485911673692344531919\",\"pbn\":\"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ\",\"np\":0,\"ep\":0,\"sp\":3,\"wp\":37}"
 var mockNewpos = []int{10, 14, 27}
-var mockData = []string{"36", "37", "38", "39", "43", "41", "42", "40", "38 39", "37 39", "36 39", "37 38", "36 38", "36 37"}
 var mockDataInt = []int{40, 41, 43, 50}
 var mockDataIntNotInList = []int{42, 49}
 
