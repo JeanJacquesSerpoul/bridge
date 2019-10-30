@@ -705,7 +705,7 @@ func shuffle(sh ShuffleInterface, content []int) []int {
 func suitHandPbnToArray(suitString string, suit int) []int {
 	var r []int
 	var v int
-	for i := 0; i < len(suitString); i++ {
+	for i := range suitString {
 		v = faceCardsValue(suitString[i : i+1])
 		v = (v << 2) + suit
 		r = append(r, v)
@@ -749,17 +749,17 @@ func MaskToArray(mask string) []int {
 	var tabHand []string
 	hcol := make([][]int, HC)
 	s := strings.Split(mask, SPACE)
-	for i := 0; i < HC; i++ {
+	for i := range s {
 		hand = strings.TrimSpace(s[i])
 		tabHand = strings.Split(hand, POINT)
-		for j := 0; j < HC; j++ {
+		for j := range tabHand {
 			v = suitHandPbnToArray(tabHand[j], HC-j-1)
-			for k := 0; k < len(v); k++ {
+			for k := range v {
 				hcol[i] = append(hcol[i], v[k])
 			}
 		}
 	}
-	for i := 0; i < HC; i++ {
+	for i := range hcol {
 		hcol[i] = fillHand(hcol[i])
 		r = append(r, hcol[i]...)
 	}
