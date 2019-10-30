@@ -5,7 +5,6 @@ debug
 misc_test/*.*
 debug.test
 *.out
-*.ps1
 *.exe
 server/deskserver_arm
 server/deskserver_linux
