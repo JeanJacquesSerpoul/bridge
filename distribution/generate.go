@@ -1168,7 +1168,7 @@ func maskCheck(mask string) error {
 		err = fmt.Errorf(ErrMsg["4_hands"])
 		return err
 	}
-	for i := 0; i < HC; i++ {
+	for i := range s {
 		tab = strings.Split(s[i], POINT)
 		if len(tab) != HC {
 			err = fmt.Errorf(Position[i] + ErrMsg["4_suits"])
