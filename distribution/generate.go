@@ -119,22 +119,20 @@ func genereArrayFromList(seq []int, k int) [][]int {
 }
 
 func genDistWithPoint(k int) ([]int, []string) {
-	var mask, tpoints []int
+	var tpoints []int
 	var points int
 	var stemp string
 	var result []string
 	tmask := genereArrayFromList(cardsWithPoints(), k)
-	m := len(tmask)
-	for i := 0; i < m; i++ {
-		mask = tmask[i]
+	for _, mask := range tmask {
 		points = 0
-		for k := 0; k < len(mask); k++ {
-			points += cardLevel(mask[k])
+		for _, vmask := range mask {
+			points += cardLevel(vmask)
 		}
 		tpoints = append(tpoints, points)
 		stemp = ""
-		for k := 0; k < len(mask); k++ {
-			stemp = stemp + strconv.Itoa(mask[k]) + " "
+		for _, vmask := range mask {
+			stemp = stemp + strconv.Itoa(vmask) + " "
 		}
 		stemp = strings.TrimSpace(stemp)
 		result = append(result, stemp)
@@ -292,9 +290,8 @@ func loadData(input []string, pMin, pMax int) ([]string, error) {
 	var d, stemp []string
 	var k int
 	var err error
-
-	for i := 0; i < len(input); i++ {
-		stemp = strings.Split(input[i], TAB)
+	for _, vinput := range input {
+		stemp = strings.Split(vinput, TAB)
 		k, err = strconv.Atoi(stemp[0])
 		if err != nil {
 			return nil, err
@@ -310,9 +307,9 @@ func loadData(input []string, pMin, pMax int) ([]string, error) {
 	return d, err
 }
 func checkList(list, notInList []int) bool {
-	for i := 0; i < len(list); i++ {
-		for j := 0; j < len(notInList); j++ {
-			if list[i] == notInList[j] {
+	for _, vlist := range list {
+		for _, vnotInList := range notInList {
+			if vlist == vnotInList {
 				return false
 			}
 		}
@@ -323,8 +320,8 @@ func atoiArray(s []string) ([]int, error) {
 	var result []int
 	var itemp int
 	var err error
-	for i := 0; i < len(s); i++ {
-		itemp, err = strconv.Atoi(s[i])
+	for _, vs := range s {
+		itemp, err = strconv.Atoi(vs)
 		if err != nil {
 			return nil, err
 		}
@@ -358,8 +355,8 @@ func GetRandomFromData(sh ShuffleInterface, loadingData []string, pMin, pMax int
 		list = append(list, i)
 	}
 	random := shuffle(sh, list)
-	for i := 0; i < len(random); i++ {
-		r = s[random[i]]
+	for _, vrandom := range random {
+		r = s[vrandom]
 		v = strings.Split(r, SPACE)
 		atemp, _ = atoiArray(v)
 		if checkList(atemp, notInList) {
@@ -371,8 +368,8 @@ func GetRandomFromData(sh ShuffleInterface, loadingData []string, pMin, pMax int
 }
 
 func intInSlice(a int, list []int) int {
-	for i := 0; i < len(list); i++ {
-		if list[i] == a {
+	for _, vlist := range list {
+		if vlist == a {
 			return a
 		}
 	}
@@ -381,10 +378,10 @@ func intInSlice(a int, list []int) int {
 func delta(slice []int, ToRemove []int) []int {
 	var diff []int
 	var n int
-	for i := 0; i < len(slice); i++ {
-		n = intInSlice(slice[i], ToRemove)
+	for _, vslice := range slice {
+		n = intInSlice(vslice, ToRemove)
 		if n < 0 {
-			diff = append(diff, slice[i])
+			diff = append(diff, vslice)
 		}
 	}
 	return diff
@@ -551,11 +548,10 @@ func boardValue(board []int) int {
 func handArrayToString(hand []int) string {
 	var suitHand handSuit
 	var c [HC]int
-	l := len(hand)
 	r := ""
-	for i := 0; i < l; i++ {
-		suitHand[cardSuitInt(hand[i])][c[cardSuitInt(hand[i])]] = hand[i]
-		c[cardSuitInt(hand[i])]++
+	for _, vhand := range hand {
+		suitHand[cardSuitInt(vhand)][c[cardSuitInt(vhand)]] = vhand
+		c[cardSuitInt(vhand)]++
 	}
 	for i := HC - 1; i >= 0; i-- {
 		for j := 0; j < c[i]; j++ {
@@ -569,8 +565,8 @@ func handArrayToString(hand []int) string {
 }
 
 func faceCardsValue(s string) int {
-	for i := 0; i < HCC; i++ {
-		if faceCards[i] == s {
+	for i, vfaceCards := range faceCards {
+		if vfaceCards == s {
 			return i
 		}
 	}
