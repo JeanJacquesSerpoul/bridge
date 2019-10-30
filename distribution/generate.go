@@ -694,14 +694,13 @@ func shuffleInterval(sh ShuffleInterface, min, max int) int {
 
 //Shuffle ...
 func shuffle(sh ShuffleInterface, content []int) []int {
-	l := len(content)
-	tabCopy := make([]int, l)
-	for i := 0; i < l; i++ {
-		tabCopy[i] = content[i]
+	tabCopy := make([]int, len(content))
+	for i, scontent := range content {
+		tabCopy[i] = scontent
 	}
-	tab := sh.fYShuffle(l)
-	for i := 0; i < l; i++ {
-		tabCopy[tab[i]] = content[i]
+	tab := sh.fYShuffle(len(content))
+	for i, scontent := range content {
+		tabCopy[tab[i]] = scontent
 	}
 	return tabCopy
 }
@@ -738,11 +737,10 @@ func shuffleHand(sh ShuffleInterface, arrayOfSuit []int, mask string) ([]int, er
 
 func fillHand(board []int) []int {
 	result := make([]int, HCC)
-	l := len(board)
-	for i := 0; i < l; i++ {
-		result[i] = board[i]
+	for i, vboard := range board {
+		result[i] = vboard
 	}
-	for i := l; i < HCC; i++ {
+	for i := len(board); i < HCC; i++ {
 		result[i] = NOCARD
 	}
 	return result
@@ -781,8 +779,8 @@ func getASuit(arrayOfSuit []int, handFromPosition, suitFromRandom int) int {
 
 func inNewPos(v int, np []int) bool {
 	result := false
-	for i := 0; i < len(np); i++ {
-		if v == np[i] {
+	for _, vnp := range np {
+		if v == vnp {
 			return true
 		}
 	}
@@ -790,8 +788,8 @@ func inNewPos(v int, np []int) bool {
 }
 
 func checkInMask(tabMask []int, v int) bool {
-	for i := 0; i < len(tabMask); i++ {
-		if v == tabMask[i] {
+	for _, vtabMask := range tabMask {
+		if v == vtabMask {
 			return true
 		}
 	}
@@ -804,7 +802,7 @@ func advanceCheck(tabMask, remain, arrayOfSuit []int, r, newpos *[]int) bool {
 	if len(remain) == 0 {
 		return true
 	}
-	for k := 0; k < len(remain); k++ {
+	for _, vremain := range remain {
 		success = false
 		for i := 0; i < DC; i++ {
 			if success {
@@ -812,11 +810,11 @@ func advanceCheck(tabMask, remain, arrayOfSuit []int, r, newpos *[]int) bool {
 			}
 			if (*r)[i] == NOCARD {
 				for jj := 0; jj < DC; jj++ {
-					check = (*r)[jj] != NOCARD && !inNewPos((*r)[jj], *newpos) && !checkInMask(tabMask, (*r)[jj]) && getASuit(arrayOfSuit, i, (*r)[jj]) == NOVALUESUIT && getASuit(arrayOfSuit, jj, remain[k]) == NOVALUESUIT
+					check = (*r)[jj] != NOCARD && !inNewPos((*r)[jj], *newpos) && !checkInMask(tabMask, (*r)[jj]) && getASuit(arrayOfSuit, i, (*r)[jj]) == NOVALUESUIT && getASuit(arrayOfSuit, jj, vremain) == NOVALUESUIT
 					if check {
 						(*r)[i] = (*r)[jj]
-						(*r)[jj] = remain[k]
-						*newpos = append(*newpos, remain[k])
+						(*r)[jj] = vremain
+						*newpos = append(*newpos, vremain)
 						success = true
 						break
 					}
@@ -842,12 +840,12 @@ func checkHandPoint(content, c []int) bool {
 func putDataInDist(sh ShuffleInterface, content, tabMask []int, r *[]int) {
 	j := 0
 	tab := shuffle(sh, content)
-	for i := 0; i < DC; i++ {
-		if tabMask[i] == NOCARD {
+	for i, vtabMask := range tabMask {
+		if vtabMask == NOCARD {
 			(*r)[i] = tab[j]
 			j++
 		} else {
-			(*r)[i] = tabMask[i]
+			(*r)[i] = vtabMask
 		}
 
 	}
@@ -888,11 +886,11 @@ func shuffleRemainHands(sh ShuffleInterface, arrayOfSuit, arrayOfPoint []int, ta
 			j = 0
 			remain = nil
 			newpos = nil
-			for i := 0; i < DC; i++ {
+			for i, _ := range r {
 				r[i] = NOCARD
 			}
-			for i := 0; i < DC; i++ {
-				if tabMask[i] == NOCARD {
+			for i, vtabMask := range tabMask {
+				if vtabMask == NOCARD {
 					aSuit = getASuit(arrayOfSuit, i, tab[j])
 					if aSuit == NOVALUESUIT {
 						r[i] = tab[j]
@@ -902,7 +900,7 @@ func shuffleRemainHands(sh ShuffleInterface, arrayOfSuit, arrayOfPoint []int, ta
 						j++
 					}
 				} else {
-					r[i] = tabMask[i]
+					r[i] = vtabMask
 				}
 			}
 			success = advanceCheck(tabMask, remain, arrayOfSuit, &r, &newpos)
@@ -967,8 +965,8 @@ func rotateMask(pbn string) string {
 		rotateStrArray(&tmask)
 	}
 	mask = ""
-	for i := 0; i < HC; i++ {
-		mask += tmask[i] + SPACE
+	for _, vtmask := range tmask {
+		mask += vtmask + SPACE
 	}
 	mask = strings.TrimSpace(mask)
 	return mask
@@ -1201,12 +1199,11 @@ func valueAndSuitToCard(value, suit int) int {
 
 //convertIndexArrayToDist ...
 func convertIndexArrayToDist(index []int) []int {
-	var suit, hand, value, cardValue int
+	var suit, value, cardValue int
 	r := make([]int, DC)
 	tabHand := make([]int, HC)
 	reverse := make([]int, DC)
-	for i := 0; i < DC; i++ {
-		hand = index[i]
+	for i, hand := range index {
 		value = i % HCC
 		suit = i / HCC
 		cardValue = valueAndSuitToCard(value, suit)
@@ -1223,9 +1220,8 @@ func convertIndexArrayToDist(index []int) []int {
 
 //convertDistToIndexArray ...
 func convertDistToIndexArray(content []int, index *[DC]int) {
-	var suit, height, v int
-	for i := 0; i < len(content); i++ {
-		v = content[i]
+	var suit, height int
+	for i, v := range content {
 		suit = cardSuitInt(v)
 		height = cardValueInt(v)
 		index[suit*HCC+height] = getHandFromDist(i)
