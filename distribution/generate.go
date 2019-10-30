@@ -697,8 +697,8 @@ func shuffle(sh ShuffleInterface, content []int) []int {
 	tabCopy := make([]int, len(content))
 	copy(tabCopy, content)
 	tab := sh.fYShuffle(len(content))
-	for i, scontent := range content {
-		tabCopy[tab[i]] = scontent
+	for i := range content {
+		tabCopy[tab[i]] = content[i]
 	}
 	return tabCopy
 }
@@ -800,12 +800,12 @@ func advanceCheck(tabMask, remain, arrayOfSuit []int, r, newpos *[]int) bool {
 	}
 	for _, vremain := range remain {
 		success = false
-		for i := 0; i < DC; i++ {
+		for i := range *r {
 			if success {
 				break
 			}
 			if (*r)[i] == NOCARD {
-				for jj := 0; jj < DC; jj++ {
+				for jj := range *r {
 					check = (*r)[jj] != NOCARD && !inNewPos((*r)[jj], *newpos) && !checkInMask(tabMask, (*r)[jj]) && getASuit(arrayOfSuit, i, (*r)[jj]) == NOVALUESUIT && getASuit(arrayOfSuit, jj, vremain) == NOVALUESUIT
 					if check {
 						(*r)[i] = (*r)[jj]
