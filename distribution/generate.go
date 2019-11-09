@@ -660,7 +660,7 @@ func PbnAndIndexGenerateFromSuits(sh ShuffleInterface, input string) (string, er
 func (rd *Random) fYShuffle(n int) []int {
 	var random, temp int
 	t := make([]int, n)
-	for i := 0; i < n; i++ {
+	for i := range t {
 		t[i] = i
 	}
 	for i := len(t) - 1; i >= 0; i-- {
