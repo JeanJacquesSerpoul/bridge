@@ -12,7 +12,6 @@ import (
 )
 
 var sep = ";"
-var lRes = 20
 
 //JSONtableRes ...
 type JSONtableRes struct {
