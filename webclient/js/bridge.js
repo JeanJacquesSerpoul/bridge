@@ -135,7 +135,7 @@ function showDesk(r) {
 
 function getVersion() {
 	$.ajax({
-		url: 'api/version',
+		url: 'api/v1/version',
 		type: 'GET',
 		success: function (result) {
 			$("#version").text("API version : " + result)
@@ -161,7 +161,7 @@ function getFromIndex() {
 	$('#getfromindexbtn').prop("disabled", true);
 	initCalc();
 	$.ajax({
-		url: 'api/index',
+		url: 'api/v1/index',
 		type: 'GET',
 		data: {
 			value: indexValue
@@ -218,7 +218,7 @@ function pbn() {
 	if (activeTabs() == 0) {
 		var mask = getPbn();
 		$.ajax({
-			url: 'api/maskmultipbn',
+			url: 'api/v1/maskmultipbn',
 			type: 'POST',
 			data: {
 				mask: mask,
@@ -242,7 +242,7 @@ function pbn() {
 	if (activeTabs() == 1) {
 		mask = getSuit();
 		$.ajax({
-			url: 'api/suitmultipbn',
+			url: 'api/v1/suitmultipbn',
 			type: 'POST',
 			data: {
 				mask: mask,
@@ -267,7 +267,7 @@ function pbn() {
 	if (activeTabs() == 2) {
 		mask = getPoints();
 		$.ajax({
-			url: 'api/pointmultipbn',
+			url: 'api/v1/pointmultipbn',
 			type: 'POST',
 			data: {
 				mask: mask,
@@ -479,7 +479,7 @@ function setPbn() {
 	mask = $("#currentpbn").val();
 	$('#setpbnbtn').prop("disabled", true);
 	$.ajax({
-		url: 'api/maskpbn',
+		url: 'api/v1/maskpbn',
 		type: 'POST',
 		data: {
 			mask: mask
@@ -525,7 +525,7 @@ function calcPar() {
 		var vul = $("#vulnerable").find('option:selected').val()
 		$('#calcparbtn').prop("disabled", true);
 		$.ajax({
-			url: 'api/parpbn',
+			url: 'api/v1/parpbn',
 			type: 'GET',
 			data: {
 				pbn: mask,
@@ -592,7 +592,7 @@ function generate() {
 		var mask
 		mask = getPbn();
 		$.ajax({
-			url: 'api/maskpbn',
+			url: 'api/v1/maskpbn',
 			type: 'POST',
 			data: {
 				mask: mask
@@ -614,7 +614,7 @@ function generate() {
 		var mask
 		mask = getSuit();
 		$.ajax({
-			url: 'api/suitpbn',
+			url: 'api/v1/suitpbn',
 			type: 'POST',
 			data: {
 				mask: mask
@@ -636,7 +636,7 @@ function generate() {
 		var mask
 		mask = getPoints();
 		$.ajax({
-			url: 'api/pointpbn',
+			url: 'api/v1/pointpbn',
 			type: 'POST',
 			data: {
 				mask: mask
