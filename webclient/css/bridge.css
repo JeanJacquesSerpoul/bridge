@@ -87,7 +87,7 @@ html {
 }
 #tabulation {
     width:525px;
-    height:200px;
+    height:230px;
 }
 #color-status{
     background-color: red;
@@ -143,7 +143,7 @@ input[type=button]:disabled {
     display: inline-block;
     position: relative;
     width: 80px;
-    height: 80px;
+    height: 20px;
     display:none;
 }
 #wait div {
