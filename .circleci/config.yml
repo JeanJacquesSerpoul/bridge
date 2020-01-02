@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.14.0
+    working_directory: /go/src/github.com/bridge
+    steps:
+      - checkout
+      - run: go test -v ./distribution/...
