@@ -99,5 +99,3 @@ int main(int argc, char *argv[])
      PrintTableGo(&table);
     }
 }
-calcPar.cpp
-Affichage de calcPar.cpp en cours...
