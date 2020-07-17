@@ -1,3 +1,25 @@
+
+
+Aller au contenu
+Utiliser Gmail avec un lecteur d'écran
+
+1 sur 1
+calcpar + libdds + makefile pour rpi
+Boîte de réception
+x
+bridge
+x
+golang
+x
+
+Jean-Jacques Serpoul <serpoul@gmail.com>
+Pièces jointes
+18:25 (il y a 15 minutes)
+À moi
+
+
+3 pièces jointes
+
 /*
    DDS, a bridge double dummy solver.
 
@@ -13,10 +35,13 @@
 #include <string.h>
 #include "../include/dll.h"
 
-unsigned char dcardSuit[5] = { 'S', 'H', 'D', 'C', 'N' };
+void PrintTableGo(ddTableResults*);
+void PrintParGo(parResults*);
+
+unsigned char dcardSuitGo[5] = { 'S', 'H', 'D', 'C', 'N' };
 
 
-void PrintTable(ddTableResults * table)
+void PrintTableGo(ddTableResults * table)
 {
   
   printf("%5d;%5d;%5d;%5d;",
@@ -35,7 +60,7 @@ void PrintTable(ddTableResults * table)
   }
 }
 
-void PrintPar(parResults * par)
+void PrintParGo(parResults * par)
 {
   printf("%s;%s;%s;%s",par->parScore[0],par->parScore[1],par->parContractsString[0],par->parContractsString[1]);
 }
@@ -69,8 +94,10 @@ int main(int argc, char *argv[])
     printf("DDS error: %s\n", line);
   } else {
      Par(&table, &pres, iVul);
-     PrintPar(&pres);
+     PrintParGo(&pres);
      printf("\n");
-     PrintTable(&table);
+     PrintTableGo(&table);
     }
 }
+calcPar.cpp
+Affichage de calcPar.cpp en cours...
