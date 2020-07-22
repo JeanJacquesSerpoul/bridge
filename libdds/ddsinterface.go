@@ -65,7 +65,7 @@ func CallParDDS(pbn string, sVul string) (string, error) {
 	var err error
 	pbn = strings.ToUpper(pbn)
 	vul := convertVul(sVul)
-	data, err := exec.Command("calcPar", pbn, strconv.Itoa(vul)).Output()
+	data, err := exec.Command("./calcPar", pbn, strconv.Itoa(vul)).Output()
 	if err != nil {
 		return "", err
 	}
