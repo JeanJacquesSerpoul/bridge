@@ -1,0 +1,64 @@
+# This is a Makefile for the examples,
+# for Windows and the Microsoft Visual C++ compiler.
+
+# It does assume a Unix-like setup for some commands,
+# but if you only want to call "make" with the default target,
+# you should be OK.
+
+# The test program itself does not use multi-threading, 
+# but the DLL might, depending on how it was compiled.
+
+# If your Microsoft compiler is not called cl, change it here.
+CC		= cl
+CC_FLAGS     	= /O2 /Oi /Ot /Oy /GL
+LINK_FLAGS	= /LTCG
+
+# These flags are not turned on by default, but DDS should pass them.
+# Turn them on below.
+WARN_FLAGS	=		\
+	/Wall			\
+	/wd4127			\
+	/wd4514			\
+	/wd4555			\
+	/wd4668			\
+	/wd4701			\
+	/wd4711			\
+	/wd4820			\
+	/wd4986			\
+	/wd4987			\
+	/wd4996			\
+	/WX-
+
+# Here you can turn on warnings.
+# CC_FULL_FLAGS	= $(CC_FLAGS)
+CC_FULL_FLAGS	= $(CC_FLAGS) $(WARN_FLAGS)
+
+DTEST		= dtest
+ITEST		= itest
+
+DLLBASE		= dds
+DLL 		= $(DLLBASE).dll
+DLIB 		= $(DLLBASE).lib
+EXPORTER	= Exports.def
+
+	
+OBJ_FILES	= $(subst .cpp,.obj,$(COMMON_SOURCE_FILES))
+EX_OBJ_FILES	= $(subst .cpp,.obj,$(ALL_EXAMPLE_FILES))
+EX_EXE_FILES	= $(subst .cpp,.exe,$(ALL_EXAMPLE_FILES))
+
+calcPar:	 calcPar.obj
+	link /LTCG  $(DLIB) calcPar.obj /out:calcPar.exe
+
+
+%.obj:	%.cpp
+	$(CC) $(CC_FULL_FLAGS) /c $< /Fo$*.obj
+
+depend:
+	makedepend -Y -o.obj -- $(cOMMON_SOURCE_FILES) $(ALL_EXAMPLE_FILES)
+
+clean:
+	rm -f $(OBJ_FILES) $(EX_OBJ_FILES) $(EX_EXE_FILES) $(DLL) $(DLIB)
+
+
+
+
