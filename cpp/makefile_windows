@@ -1,3 +1,10 @@
+
+# make is a GNU command install MinGW and then do:
+
+# copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
+# or create a link to the actual executable, in your PATH. In this case, if you update MinGW, the link is not deleted:
+
+# mklink c:\bin\make.exe C:\MinGW\bin\mingw32-make.exe
 # This is a Makefile for the examples,
 # for Windows and the Microsoft Visual C++ compiler.
 
