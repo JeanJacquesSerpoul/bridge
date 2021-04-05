@@ -242,7 +242,7 @@ function pbn() {
 	if (activeTabs() == 1) {
 		mask = getSuit();
 		$.ajax({
-			url: 'api/v1/suitmultipbn',
+			url: 'api/v1/maskmultipbn',
 			type: 'POST',
 			data: {
 				mask: mask,
