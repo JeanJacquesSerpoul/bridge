@@ -1,27 +1,27 @@
 package distribution
 
-//FIRSTHANDSEPARATOR ...
+// FIRSTHANDSEPARATOR ...
 const FIRSTHANDSEPARATOR = ":"
 
-//BOARDMINUSHAND ...
+// BOARDMINUSHAND ...
 const BOARDMINUSHAND = 3
 
-//TAB ...
+// TAB ...
 const TAB = "\t"
 
-//NEWLINE ...
+// NEWLINE ...
 const NEWLINE = "\n"
 
-//MAXPOINTSINHAND ...
+// MAXPOINTSINHAND ...
 const MAXPOINTSINHAND = 37
 
-//MINPOINTSINHAND ...
+// MINPOINTSINHAND ...
 const MINPOINTSINHAND = 0
 
-//NBPC 8 points constraints
-var NBPC = 8
+// NBPC 8 points constraints
+const NBPC = 8
 
-//MaxPbnGeneration Arbitrary limit
+// MaxPbnGeneration Arbitrary limit
 var MaxPbnGeneration = 10000
 
 // COMMA separator for suits distribution input
@@ -36,16 +36,16 @@ const NOCARD = -1
 // NOVALUESUIT in distribution array
 const NOVALUESUIT = -1
 
-//DC Desck Count ...
+// DC Desck Count ...
 const DC = 52
 
-//HCC Hand Cards count
+// HCC Hand Cards count
 const HCC = 13
 
-//HC Hand count
+// HC Hand count
 const HC = 4
 
-//DP Desk Point
+// DP Desk Point
 const DP = 40
 
 // SUITCOUNT ...
@@ -54,46 +54,48 @@ const SUITCOUNT = 16
 // NbDist Number of different distribution CNP(52,13)*CNP(39,13)*CNP(26,13)
 const NbDist = "53644737765488792839237440000"
 
-//POINT in pbn
-var POINT = "."
+// POINT in pbn
+const POINT = "."
 
-//SPACE in pbn
-var SPACE = " "
+// SPACE in pbn
+const SPACE = " "
 
-//EMPTYHAND in pbn
-var EMPTYHAND = "..."
+// EMPTYHAND in pbn
+const EMPTYHAND = "..."
 
-//EMPTYDESK in pbn
-var EMPTYDESK = "... ... ... ..."
+// EMPTYDESK in pbn
+const EMPTYDESK = "... ... ... ..."
 
-//EMPTYSUIT ...
-var EMPTYSUIT = "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+// EMPTYSUIT ...
+const EMPTYSUIT = "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
 
-//EMPTYPOINTS ...
-var EMPTYPOINTS = "-1,-1,-1,-1,-1,-1,-1,-1"
+// EMPTYPOINTS ...
+const EMPTYPOINTS = "-1,-1,-1,-1,-1,-1,-1,-1"
 
-//MAXTRY ...
-var MAXTRY = 50
+// MAXTRY ...
+const MAXTRY = 50
 
 var faceCards = []string{"2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"}
 
-var initHand = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+var initHand = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+	17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+	36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
 
-var firstDefaultHand = "N"
+const firstDefaultHand = "N"
 
-//Position ...
+// Position ...
 var Position = []string{"N", "E", "S", "W"}
 
-//Vulnerable ...
+// Vulnerable ...
 var Vulnerable = []string{"ALL", "NS", "EW", "NONE"}
 
-//POINTSVALUE to be replace by real values
-var POINTSVALUE = "<POINTS>"
+// POINTSVALUE to be replace by real values
+const POINTSVALUE = "<POINTS>"
 
-//INDEXVALUE to be replace by index value
-var INDEXVALUE = "<INDEX>"
+// INDEXVALUE to be replace by index value
+const INDEXVALUE = "<INDEX>"
 
-//ErrMsg ...
+// ErrMsg ...
 var ErrMsg = map[string]string{
 	"no_40_points":               "Error in mask-err 1",
 	"4_hands":                    " should have 4 hands-err 2",

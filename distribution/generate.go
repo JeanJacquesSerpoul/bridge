@@ -85,58 +85,75 @@ func cardsWithPoints() []int {
 
 func genereList(seq []int, k int) []int {
 	var p, s []int
+
 	var ii, jj uint
+
 	fmax := math.Exp2((float64)(len(seq))) - 1
 	imax := int(fmax)
+
 	for i := 0; i <= imax; i++ {
 		s = nil
 		jmax := len(seq) - 1
+
 		for j := 0; j <= jmax; j++ {
 			ii = uint(i)
 			jj = uint(j)
+
 			if (ii>>jj)&1 == 1 {
 				s = append(s, seq[j])
 			}
 		}
+
 		if len(s) == k {
 			p = append(p, s...)
 		}
 	}
+
 	return p
 }
 
 func genereArrayFromList(seq []int, k int) [][]int {
 	var m int
+
 	v := genereList(seq, k)
 	m = len(v) / k
 	t := make([][]int, m)
+
 	for i := 0; i < m; i++ {
 		for j := 0; j < k; j++ {
 			t[i] = append(t[i], v[i*k+j])
 		}
 	}
+
 	return t
 }
 
 func genDistWithPoint(k int) ([]int, []string) {
 	var tpoints []int
-	var points int
-	var stemp string
 	var result []string
+
+	var points int
+
+	var stemp string
+
 	tmask := genereArrayFromList(cardsWithPoints(), k)
 	for _, mask := range tmask {
 		points = 0
 		for _, vmask := range mask {
 			points += cardLevel(vmask)
 		}
+
 		tpoints = append(tpoints, points)
 		stemp = ""
+
 		for _, vmask := range mask {
 			stemp = stemp + strconv.Itoa(vmask) + " "
 		}
+
 		stemp = strings.TrimSpace(stemp)
 		result = append(result, stemp)
 	}
+
 	return tpoints, result
 }
 
@@ -146,21 +163,25 @@ func saveGenDistWithPointToString(
 ) []string {
 	var result []string
 	for i, po := range points {
-
 		result = append(result, strconv.Itoa(po)+"\t"+list[i])
 	}
+
 	return result
 }
 
 func genDistWithPointToString(kmin, kmax int) []string {
 	var tp, p []int
+
 	var td, d []string
+
 	var list []listData
+
 	for i := kmin; i <= kmax; i++ {
 		p, d = genDistWithPoint(i)
 		tp = append(tp, p...)
 		td = append(td, d...)
 	}
+
 	list = make([]listData, len(tp))
 	for i := 0; i < len(tp); i++ {
 		list[i].points = tp[i]
@@ -169,23 +190,28 @@ func genDistWithPointToString(kmin, kmax int) []string {
 	sort.Slice(list, func(i, j int) bool {
 		return list[i].points < list[j].points
 	})
+
 	for i := 0; i < len(tp); i++ {
 		tp[i] = list[i].points
 		td[i] = list[i].dist
 	}
+
 	result := saveGenDistWithPointToString(tp, td)
+
 	return result
 }
 
-//GetPbnHandsFromPoints ...
+// GetPbnHandsFromPoints ...
 func GetPbnHandsFromPoints(sh ShuffleInterface, input string) (string, error) {
 	var ar, c []int
+
 	var err error
 
 	c, err = inputPointsDistToStruct(input)
 	if err != nil {
 		return "", err
 	}
+
 	if c[1] == NOPOINT {
 		c[1] = MAXPOINTSINHAND
 	}
@@ -211,6 +237,7 @@ func GetPbnHandsFromPoints(sh ShuffleInterface, input string) (string, error) {
 	if c[6] == NOPOINT {
 		c[6] = MINPOINTSINHAND
 	}
+
 	loadingData := genDistWithPointToString(1, HCC)
 	for i := 0; i < MAXTRY; i++ {
 		ar, err = GetHandsFromPoints(sh, c, loadingData)
@@ -221,19 +248,26 @@ func GetPbnHandsFromPoints(sh ShuffleInterface, input string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	ar = sortCards(ar)
 	s := toPbn(ar)
 	v := boardValueToArray(ar)
-	result := ResultHTTP{Index: ArrayToIndex(ar), Pbn: s, NorthPoint: v[0], EastPoint: v[1], SouthPoint: v[2], WestPoint: v[3]}
+	result := ResultHTTP{Index: ArrayToIndex(ar), Pbn: s,
+		NorthPoint: v[0], EastPoint: v[1], SouthPoint: v[2],
+		WestPoint: v[3]}
 	r, _ := json.Marshal(result)
+
 	return string(r), nil
 }
 
-//GetHandsFromPoints ...
+// GetHandsFromPoints ...
 func GetHandsFromPoints(sh ShuffleInterface, c []int, loadingData []string) ([]int, error) {
 	var v, r []int
+
 	var hand [HC][]int
+
 	var err error
+
 	mask := make([]int, DC)
 	ps := make([]pointStruct, HC)
 	ps[0].Orientation = 0
@@ -260,25 +294,31 @@ func GetHandsFromPoints(sh ShuffleInterface, c []int, loadingData []string) ([]i
 	if DP-ps[2].MinPoints-ps[1].MinPoints < ps[3].MaxPoints {
 		ps[3].MaxPoints = ps[3].MaxPoints - ps[2].MinPoints - ps[1].MinPoints - ps[0].MinPoints + BOARDMINUSHAND
 	}
+
 	hand[ps[0].Orientation], err = GetRandomFromData(sh, loadingData, ps[0].MinPoints, ps[0].MaxPoints, nil)
 	if err != nil {
 		return nil, err
 	}
+
 	for i := 1; i < HC; i++ {
 		v = append(v, hand[ps[i-1].Orientation]...)
 		hand[ps[i].Orientation], err = GetRandomFromData(sh, loadingData, ps[i].MinPoints, ps[i].MaxPoints, v)
+
 		if err != nil {
 			return nil, err
 		}
 	}
+
 	for i := 0; i < DC; i++ {
 		mask[i] = NOCARD
 	}
+
 	for i := 0; i < HC; i++ {
 		for j := 0; j < len(hand[i]); j++ {
 			mask[HCC*i+j] = hand[i][j]
 		}
 	}
+
 	r, err = shuffleRemainHands(sh, nil, c, mask)
 	if err != nil {
 		return nil, err
@@ -288,11 +328,15 @@ func GetHandsFromPoints(sh ShuffleInterface, c []int, loadingData []string) ([]i
 
 func loadData(input []string, pMin, pMax int) ([]string, error) {
 	var d, stemp []string
+
 	var k int
+
 	var err error
+
 	for _, vinput := range input {
 		stemp = strings.Split(vinput, TAB)
 		k, err = strconv.Atoi(stemp[0])
+
 		if err != nil {
 			return nil, err
 		}
@@ -314,27 +358,36 @@ func checkList(list, notInList []int) bool {
 			}
 		}
 	}
+
 	return true
 }
 func atoiArray(s []string) ([]int, error) {
 	var result []int
+
 	var itemp int
+
 	var err error
+
 	for _, vs := range s {
 		itemp, err = strconv.Atoi(vs)
 		if err != nil {
 			return nil, err
 		}
+
 		result = append(result, itemp)
 	}
+
 	return result, nil
 }
 
-//GetRandomFromData ...
+// GetRandomFromData ...
 func GetRandomFromData(sh ShuffleInterface, loadingData []string, pMin, pMax int, notInList []int) ([]int, error) {
 	var list, atemp []int
+
 	var r string
+
 	var v []string
+
 	if pMin < 0 || pMax < 0 || pMin > MAXPOINTSINHAND || pMax > MAXPOINTSINHAND {
 		return nil, fmt.Errorf(ErrMsg["points_beetween_0_and_37"])
 	}
@@ -350,20 +403,25 @@ func GetRandomFromData(sh ShuffleInterface, loadingData []string, pMin, pMax int
 	if s == nil {
 		return nil, nil
 	}
+
 	k := len(s)
 	for i := 0; i < k; i++ {
 		list = append(list, i)
 	}
+
 	random := shuffle(sh, list)
 	for _, vrandom := range random {
 		r = s[vrandom]
 		v = strings.Split(r, SPACE)
 		atemp, _ = atoiArray(v)
+
 		if checkList(atemp, notInList) {
 			return atemp, nil
 		}
 	}
+
 	err := fmt.Errorf(ErrMsg["error_in_getRandomFromData"])
+
 	return nil, err
 }
 
@@ -377,7 +435,9 @@ func intInSlice(a int, list []int) int {
 }
 func delta(slice []int, ToRemove []int) []int {
 	var diff []int
+
 	var n int
+
 	for _, vslice := range slice {
 		n = intInSlice(vslice, ToRemove)
 		if n < 0 {
@@ -399,10 +459,12 @@ func checkInputSuit(t []int) error {
 	for i := 0; i < SUITCOUNT; i++ {
 		if t[i] > HCC {
 			err = fmt.Errorf(ErrMsg["more_13"])
+
 			return err
 		}
 		if t[i] < NOCARD {
 			err = fmt.Errorf(ErrMsg["less_-1"])
+
 			return err
 		}
 	}
@@ -427,7 +489,7 @@ func checkArraySuit(t2 [HC][HC]int) error {
 	for j := 0; j < HC; j++ {
 		valSuit = 0
 		for i := 0; i < HC; i++ {
-			valSuit = valSuit + t2[i][j]
+			valSuit += t2[i][j]
 		}
 		if valSuit > HCC {
 			err = fmt.Errorf(ErrMsg["more_13_in_hand"])
@@ -597,7 +659,7 @@ func sortCards(content []int) []int {
 	return tabCopy
 }
 
-//toPbn ...
+// toPbn ...
 func toPbn(content []int) string {
 	r := ""
 	tabHand := make([]int, HCC)
@@ -612,7 +674,7 @@ func toPbn(content []int) string {
 	return r
 }
 
-//PbnAndIndexGenerateFromSuits ...
+// PbnAndIndexGenerateFromSuits ...
 func PbnAndIndexGenerateFromSuits(sh ShuffleInterface, input string) (string, error) {
 	var hand, suit, itemp int
 	var k [HC]int
@@ -848,7 +910,7 @@ func putDataInDist(sh ShuffleInterface, content, tabMask []int, r *[]int) {
 
 }
 
-//shuffleRemainHands ...
+// shuffleRemainHands ...
 func shuffleRemainHands(sh ShuffleInterface, arrayOfSuit, arrayOfPoint []int, tabMask []int) ([]int, error) {
 	var remain, newpos []int
 	var aSuit, j int
@@ -1242,6 +1304,7 @@ func fraction(val *big.Int, num, den int) *big.Int {
 func pages() *big.Int {
 	v := new(big.Int)
 	v.SetString((NbDist), 10)
+
 	return v
 }
 
@@ -1259,7 +1322,7 @@ func ArrayToIndex(content []int) string {
 		skipped = 0
 		goesTo = index[c-1]
 		for hand < goesTo {
-			skipped = skipped + cardsNeeded[hand]
+			skipped += cardsNeeded[hand]
 			hand++
 		}
 		minimum.Add(minimum, fraction(width, skipped, c))

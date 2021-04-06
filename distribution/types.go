@@ -1,6 +1,6 @@
 package distribution
 
-//Board ...
+// Board ...
 type Board struct {
 	Content    []int  `json:"content"`
 	Dealer     string `json:"dealer,omitempty"`

@@ -6,27 +6,53 @@ import (
 )
 
 var mockHand = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 44, 45, 46}
-var mockTest = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
-var mockTestError = []int{50, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
-var mockTestOne = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
-var mockDelta = []int{11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 47, 48, 49, 50, 51}
-var mockIndexToArray = []int{11, 7, 3, 10, 6, 2, 9, 5, 1, 12, 8, 4, 0, 23, 19, 15, 22, 18, 14, 25, 21, 17, 13, 24, 20, 16, 35, 31, 27, 38, 34, 30, 26, 37, 33, 29, 36, 32, 28, 51, 47, 43, 39, 50, 46, 42, 49, 45, 41, 48, 44, 40}
+var mockTest = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+	15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+	35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+var mockTestError = []int{50, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+	13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+	30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+var mockTestOne = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 11, 12, 13, 14,
+	15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+	33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
+var mockDelta = []int{11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+	24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+	42, 43, 47, 48, 49, 50, 51}
+var mockIndexToArray = []int{11, 7, 3, 10, 6, 2, 9, 5, 1, 12, 8, 4,
+	0, 23, 19, 15, 22, 18, 14, 25, 21, 17, 13, 24, 20, 16, 35, 31,
+	27, 38, 34, 30, 26, 37, 33, 29, 36, 32, 28, 51, 47, 43, 39, 50, 46,
+	42, 49, 45, 41, 48, 44, 40}
 
 //var maskDeskOk = "QT942.75.3.KQJ76 AJ.JT82.98642.98 865.AQ93.KQJ5.A4 K73.K64.AT7.T532"
-var maskDeskOk = ".75.3.KQJ76 AJ.JT82.98.98 865..KQJ5.A4 K73.K64.AT7.T"
-var maskDeskNot40 = "AKQJ.A.. .A.A. A..A. .AAA.."
-var maskDesk4HandsNotOk = "QT942.75.3.KQJ76 865.AQ93.KQJ5.A4 K73.K64.AT7.T532"
-var maskHand4SuitsNotOk = "QT942.75.3.KQJ76 AJ.JT82.98642.98 AQ93.KQJ5.A4 K73.K64.AT7.T532"
-var maskDesk13CardsNotOk = "QT942.75.3.KQJ76 AJ.JT82.98642.98 865.AQ93.KQJ5.A4 K73.K64.AT7.T532T"
-var handSuitOk = "QT942"
-var mockDeskArrayOk = []int{22, 14, 5, 44, 40, 36, 20, 16, 0, 1, 3, 4, 6, 51, 39, 38, 34, 26, 2, 29, 25, 28, 24, 9, 11, 12, 27, 19, 15, 45, 41, 37, 13, 48, 8, 17, 30, 31, 35, 47, 23, 7, 46, 18, 10, 49, 33, 21, 32, 42, 43, 50}
+const maskDeskOk = ".75.3.KQJ76 AJ.JT82.98.98 865..KQJ5.A4 K73.K64.AT7.T"
+
+const maskDeskNot40 = "AKQJ.A.. .A.A. A..A. .AAA.."
+
+const maskDesk4HandsNotOk = "QT942.75.3.KQJ76 865.AQ93.KQJ5.A4 K73.K64.AT7.T532"
+
+const maskHand4SuitsNotOk = "QT942.75.3.KQJ76 AJ.JT82.98642.98 AQ93.KQJ5.A4 K73.K64.AT7.T532"
+
+const maskDesk13CardsNotOk = "QT942.75.3.KQJ76 AJ.JT82.98642.98 865.AQ93.KQJ5.A4 K73.K64.AT7.T532T"
+
+const handSuitOk = "QT942"
+
+var mockDeskArrayOk = []int{22, 14, 5, 44, 40, 36, 20, 16,
+	0, 1, 3, 4, 6, 51, 39, 38, 34, 26, 2, 29, 25, 28, 24, 9,
+	11, 12, 27, 19, 15, 45, 41, 37, 13, 48, 8, 17, 30, 31, 35,
+	47, 23, 7, 46, 18, 10, 49, 33, 21, 32, 42, 43, 50}
 
 var suitTest = []int{42, 34, 30, 10, 2}
-var maskTest = "... ... 865.AQ93.KQJ5.A4 ..."
-var maskArrayTest = []int{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 27, 19, 15, 50, 42, 30, 6, 45, 41, 37, 13, 48, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
-var strDeskOk = "{\"index\":\"53607499485911673692344531919\",\"pbn\":\"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ\",\"np\":0,\"ep\":0,\"sp\":3,\"wp\":37}"
 
-var jsHTTPOk = `{
+const maskTest = "... ... 865.AQ93.KQJ5.A4 ..."
+
+var maskArrayTest = []int{-1, -1, -1, -1, -1, -1, -1, -1,
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+	-1, -1, -1, 27, 19, 15, 50, 42, 30, 6, 45, 41, 37, 13, 48, 8,
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
+
+const strDeskOk = `{"index":"53607499485911673692344531919","pbn":"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ","np":0,"ep":0,"sp":3,"wp":37}`
+
+const jsHTTPOk = `{
 	"count":1,
 	"mask":"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ",
 	"comment":"",
@@ -34,7 +60,7 @@ var jsHTTPOk = `{
 	"vulnerable":"ALL"
 }`
 
-var jsHTTPNotMaskOk = `{
+const jsHTTPNotMaskOk = `{
 	"count":1,
 	"mask":"AAA.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ",
 	"comment":"",
@@ -42,14 +68,15 @@ var jsHTTPNotMaskOk = `{
 	"vulnerable":"ALL"
 }`
 
-var jsHTTPMaxNotOk = `{
+const jsHTTPMaxNotOk = `{
 	"count":11,
 	"mask":"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ",
 	"comment":"",
 	"dealer":"N",
 	"vulnerable":"ALL"
 }`
-var jsHTTPSuitOk = `{
+
+const jsHTTPSuitOk = `{
 	"count":1,
 	"mask":"-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
 	"comment":"",
@@ -57,7 +84,7 @@ var jsHTTPSuitOk = `{
 	"vulnerable":"ALL"
 }`
 
-var jsHTTPSuitCommentOk = `{
+const jsHTTPSuitCommentOk = `{
 	"count":1,
 	"mask":"-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
 	"comment":"OK",
@@ -65,14 +92,15 @@ var jsHTTPSuitCommentOk = `{
 	"vulnerable":"ALL"
 }`
 
-var jsHTTPSuitNotOk2 = `{
+const jsHTTPSuitNotOk2 = `{
 	"count":1,
 	"mask":"-1,-1,-1,A,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
 	"comment":"",
 	"dealer":"N",
 	"vulnerable":"ALL"
 }`
-var jsHTTPSuitNotOk = `{
+
+const jsHTTPSuitNotOk = `{
 	"count":1,
 	"mask":"-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 	"comment":"",
@@ -80,7 +108,7 @@ var jsHTTPSuitNotOk = `{
 	"vulnerable":"ALL"
 }`
 
-var jsHTTPSuitMaxNotOk = `{
+const jsHTTPSuitMaxNotOk = `{
 	"count":11,
 	"mask":"-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
 	"comment":"",
@@ -88,7 +116,7 @@ var jsHTTPSuitMaxNotOk = `{
 	"vulnerable":"ALL"
 }`
 
-var jsHTTPNotOk = `{
+const jsHTTPNotOk = `{
 	"count":1
 	"mask":"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ",
 	"comment":"",
@@ -96,17 +124,17 @@ var jsHTTPNotOk = `{
 	"vulnerable":"ALL"
 }`
 
-var maskHTTPOk = "432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
-var maskHTTPToComplete = "43.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
-var maskHTTPNotOk = "432A.A32.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
-var jsResultHTTPOk = `% Index: 53607499485911673692344531919
+const maskHTTPOk = "432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
+const maskHTTPToComplete = "43.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
+const maskHTTPNotOk = "432A.A32.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
+const jsResultHTTPOk = `% Index: 53607499485911673692344531919
 [Dealer "N"]
 [Vulnerable "ALL"]
 [Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
 
 `
 
-var jsResultHTTPMaxOk = `% Index: 53607499485911673692344531919
+const jsResultHTTPMaxOk = `% Index: 53607499485911673692344531919
 [Dealer "N"]
 [Vulnerable "ALL"]
 [Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
@@ -117,61 +145,78 @@ var jsResultHTTPMaxOk = `% Index: 53607499485911673692344531919
 [Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
 
 `
-var jsResultCommentHTTPOk = `% OK
+
+const jsResultCommentHTTPOk = `% OK
 [Dealer "N"]
 [Vulnerable "ALL"]
 [Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
 
 `
-var jsonIndexWebOk = `{
+
+const jsonIndexWebOk = `{
 	"index":"212287561920562011067931171"
 }`
 
-var jsonIndexWebNotOk = `{
+const jsonIndexWebNotOk = `{
 	"index":"",
 }`
 
-var inputSuitDistok = "4,4,3,2,4,4,3,2,-1,4,-1,2,1,1,4,7"
-var inputSuitDistNotOK1 = "10,4,3,2,4,4,3,2,-1,4,-1,2,1,1,4,7"
-var inputSuitDistNotOK2 = "10,4,3,2,4,8,3,2,-8,4,-1,2,1,1,4,7"
-var inputSuitDistNotOK3 = "4,4,3,20,4,4,3,2,-1,4,-1,2,1,1,4,7"
-var inputSuitDistNotOK4 = "8,8,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
-var inputSuitDistNotokCount = "4,4,3,2,4,4,3,2,4,4,3,2,1,4,7"
-var inputSuitDistNotokNotaNumber = "4,4,3,2,A,4,3,2,4,4,3,2,1,1,4,7"
+const inputSuitDistok = "4,4,3,2,4,4,3,2,-1,4,-1,2,1,1,4,7"
+const inputSuitDistNotOK1 = "10,4,3,2,4,4,3,2,-1,4,-1,2,1,1,4,7"
+const inputSuitDistNotOK2 = "10,4,3,2,4,8,3,2,-8,4,-1,2,1,1,4,7"
+const inputSuitDistNotOK3 = "4,4,3,20,4,4,3,2,-1,4,-1,2,1,1,4,7"
+const inputSuitDistNotOK4 = "8,8,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+const inputSuitDistNotokCount = "4,4,3,2,4,4,3,2,4,4,3,2,1,4,7"
+const inputSuitDistNotokNotaNumber = "4,4,3,2,A,4,3,2,4,4,3,2,1,1,4,7"
+
 var arraySuitDistok = []int{4, 4, 3, 2, 4, 4, 3, 2, -1, 4, -1, 2, 1, 1, 4, 7}
 var mockArraySuitDistok = []int{4, 2, -1, -1, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, 3, -1}
-var DeskIndexWebOk = "{\"index\":\"212287561920562011067931171\",\"pbn\":\"AKQ.82.T9753.J72 JT432.AKQ753..T8 975.96.AKQJ42.65 86.JT4.86.AKQ943\",\"np\":10,\"ep\":10,\"sp\":10,\"wp\":10}"
 
-var mockSuitSorted = handSuit{{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}}
+const DeskIndexWebOk = `{\"index\":\"212287561920562011067931171\",\"pbn\":
+\"AKQ.82.T9753.J72 JT432.AKQ753..T8 975.96.AKQJ42.65 86.JT4.86.AKQ943\",\"np\":10,
+\"ep\":10,\"sp\":10,\"wp\":10}`
 
-var maskSuitOk = "4,2,-1,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,3,-1"
-var maskSuitEmptyOK = "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+var mockSuitSorted = handSuit{{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}}
 
-var maskSuitOk2 = "7,4,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,8"
-var maskSuitOk3 = "11,-1,-1,-1,-1,8,-1,-1,-1,-1,9,-1,-1,-1,-1,7"
-var maskSuitNotOk4 = "11,-1,-1,-1,-1,8,-1,-1,-1,-1,9,-1,-1,-1"
-var maskSuitNotOK = "7,-1,-1,5,-1,6,-1,2,1,-1,3,-1,-1,4,3,2"
-var resultSuitOk = "{\"index\":\"53451083042398609111071938586\",\"pbn\":\"5432.32.AK65.654 76.87654.987.987 JT98.JT9.QJT.QJT AKQ.AKQ.432.AK32\",\"np\":7,\"ep\":0,\"sp\":8,\"wp\":25}"
-var resultSuitOk2 = "{\"index\":\"52686974512864668390811270149\",\"pbn\":\"8765432.5432.32. 9.9876.T98765.AT QJT.KQJT.KQJ.KQJ AK.A.A4.98765432\",\"np\":0,\"ep\":4,\"sp\":21,\"wp\":15}"
-var resultSuitOk3 = "{\"index\":\"50489164962052643089238898166\",\"pbn\":\"QJT98765432.JT.. .98765432.KQ.AQT .Q.T98765432.KJ9 AK.AK.AJ.8765432\",\"np\":4,\"ep\":11,\"sp\":6,\"wp\":19}"
-var resultSuitOk4 = "{\"index\":\"53607499485911673692344531919\",\"pbn\":\"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ\",\"np\":0,\"ep\":0,\"sp\":3,\"wp\":37}"
+const maskSuitOk = "4,2,-1,-1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,3,-1"
+const maskSuitEmptyOK = "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+
+const maskSuitOk2 = "7,4,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,8"
+const maskSuitOk3 = "11,-1,-1,-1,-1,8,-1,-1,-1,-1,9,-1,-1,-1,-1,7"
+const maskSuitNotOk4 = "11,-1,-1,-1,-1,8,-1,-1,-1,-1,9,-1,-1,-1"
+const maskSuitNotOK = "7,-1,-1,5,-1,6,-1,2,1,-1,3,-1,-1,4,3,2"
+const resultSuitOk = `{\"index\":\"53451083042398609111071938586\",\"pbn\":
+\"5432.32.AK65.654 76.87654.987.987 JT98.JT9.QJT.QJT AKQ.AKQ.432.AK32\",
+\"np\":7,\"ep\":0,\"sp\":8,\"wp\":25}`
+const resultSuitOk2 = `{\"index\":\"52686974512864668390811270149\",\"pbn\":
+\"8765432.5432.32. 9.9876.T98765.AT QJT.KQJT.KQJ.KQJ AK.A.A4.98765432\",\"np\":0,
+\"ep\":4,\"sp\":21,\"wp\":15}`
+const resultSuitOk3 = `{\"index\":\"50489164962052643089238898166\",
+\"pbn\":\"QJT98765432.JT.. .98765432.KQ.AQT .Q.T98765432.KJ9 AK.AK.AJ.8765432\",
+\"np\":4,\"ep\":11,\"sp\":6,\"wp\":19}`
+
+const resultSuitOk4 = `{"index":"53607499485911673692344531919","pbn":"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ","np":0,"ep":0,"sp":3,"wp":37}`
+
 var mockNewpos = []int{10, 14, 27}
 var mockDataInt = []int{40, 41, 43, 50}
 var mockDataIntNotInList = []int{42, 49}
 
 //var cardsWithPoints = []int{36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}
 
-var mockPointsOk = "-1,-1,-1,-1,-1,-1,-1,-1"
-var mockPointResult = "{\"index\":\"53607499485911673692344531919\",\"pbn\":\"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ\",\"np\":0,\"ep\":0,\"sp\":3,\"wp\":37}"
-var mockPointsNotOk = "0,0,0,0,0,0"
+const mockPointsOk = "-1,-1,-1,-1,-1,-1,-1,-1"
+const mockPointResult = `{"index":"53607499485911673692344531919","pbn":"432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ","np":0,"ep":0,"sp":3,"wp":37}`
+const mockPointsNotOk = "0,0,0,0,0,0"
 
-var mockPointsNotOk2 = "32,8,0,0,0,0,0,0"
+const mockPointsNotOk2 = "32,8,0,0,0,0,0,0"
 
 var MockArrayOfPointNotOK = []int{32, 8, 0, 0, 0, 0, 0, 0, 8}
 var MockConstraintsPointOK = []int{0, 0, 0, 0, 0, 37, 0, 37}
 var MockConstraintsPointNotOK = []int{0, 0, 0, 0, 8, 37, 0, 37}
 
-var jsHTTPPointOk = `{
+const jsHTTPPointOk = `{
 	"count":1,
 	"mask":"-1,-1,-1,-1,-1,-1,-1,-1",
 	"comment":"",
@@ -179,14 +224,14 @@ var jsHTTPPointOk = `{
 	"vulnerable":"ALL"
 }`
 
-var jsHTTPPointOkLimit = `{
+const jsHTTPPointOkLimit = `{
 	"count":11,
 	"mask":"-1,-1,-1,-1,-1,-1,-1,-1",
 	"comment":"",
 	"dealer":"N",
 	"vulnerable":"ALL"
 }`
-var jsHTTPPointNotOk = `{
+const jsHTTPPointNotOk = `{
 	"count":1
 	"mask":"-1,-1,-1,-1,-1,-1,-1,-1",
 	"comment":"",
@@ -194,13 +239,14 @@ var jsHTTPPointNotOk = `{
 	"vulnerable":"ALL"
 }`
 
-var mockJSONPointResult = `% Index: 53607499485911673692344531919
+const mockJSONPointResult = `% Index: 53607499485911673692344531919
 [Dealer "N"]
 [Vulnerable "ALL"]
 [Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
 
 `
-var mockJSONPointLimitResult = `% Index: 53607499485911673692344531919
+
+const mockJSONPointLimitResult = `% Index: 53607499485911673692344531919
 [Dealer "N"]
 [Vulnerable "ALL"]
 [Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
@@ -211,11 +257,12 @@ var mockJSONPointLimitResult = `% Index: 53607499485911673692344531919
 [Deal "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"]
 
 `
-var dealNorthOk = "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
-var dealEastOk = "E:765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ 432.432.432.5432"
-var dealSouthOk = "S:T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ 432.432.432.5432 765.765.8765.876"
-var dealWestOk = "W:AKQJ.AKQ.AKQ.AKQ 432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9"
-var pbnFromDealOk = "432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
+
+const dealNorthOk = "N:432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
+const dealEastOk = "E:765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ 432.432.432.5432"
+const dealSouthOk = "S:T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ 432.432.432.5432 765.765.8765.876"
+const dealWestOk = "W:AKQJ.AKQ.AKQ.AKQ 432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9"
+const pbnFromDealOk = "432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"
 
 var fakePointStruct = []int{0, 0, 0, 0, 0, 0, 0, 0}
 var fakeLoadData = []string{}
@@ -251,8 +298,11 @@ func Test_cardValueInt(t *testing.T) {
 	}{
 		{"Test1", args{28}, 7},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := cardValueInt(tt.args.cardValue); got != tt.want {
 				t.Errorf("cardValueInt() = %v, want %v", got, tt.want)
 			}
@@ -271,8 +321,11 @@ func Test_cardSuitInt(t *testing.T) {
 	}{
 		{"Test1", args{15}, 3},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := cardSuitInt(tt.args.cardValue); got != tt.want {
 				t.Errorf("cardSuitInt() = %v, want %v", got, tt.want)
 			}
@@ -292,8 +345,11 @@ func Test_cardLevel(t *testing.T) {
 		{"Test1", args{17}, 0},
 		{"Test1", args{46}, 3},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := cardLevel(tt.args.cardValue); got != tt.want {
 				t.Errorf("cardLevel() = %v, want %v", got, tt.want)
 			}
@@ -321,8 +377,11 @@ func TestHandValue(t *testing.T) {
 	}{
 		{"Test1", args{mockHand}, 9},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := cardsValue(tt.args.hand); got != tt.want {
 				t.Errorf("cardsValue() = %v, want %v", got, tt.want)
 			}
@@ -342,8 +401,11 @@ func Test_faceCardsValue(t *testing.T) {
 		{"Test1", args{"J"}, 9},
 		{"Test2", args{"X"}, -1},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := faceCardsValue(tt.args.s); got != tt.want {
 				t.Errorf("faceCardsValue() = %v, want %v", got, tt.want)
 			}
@@ -363,8 +425,11 @@ func Test_checkVulnerable(t *testing.T) {
 		{"Test1", args{"X"}, false},
 		{"Test2", args{"NONE"}, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := checkVulnerable(tt.args.s); got != tt.want {
 				t.Errorf("checkVulnerable() = %v, want %v", got, tt.want)
 			}
@@ -384,8 +449,11 @@ func Test_checkDealer(t *testing.T) {
 		{"Test1", args{"X"}, false},
 		{"Test2", args{"N"}, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := checkDealer(tt.args.s); got != tt.want {
 				t.Errorf("checkDealer() = %v, want %v", got, tt.want)
 			}
@@ -409,8 +477,11 @@ func Test_maskCheck(t *testing.T) {
 		{"Test6", args{mask: maskHand4SuitsNotOk}, true},
 		{"Test7", args{mask: maskDesk13CardsNotOk}, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if err := maskCheck(tt.args.mask); (err != nil) != tt.wantErr {
 				t.Errorf(" %v maskCheck() error = %v, wantErr %v", tt.name, err, tt.wantErr)
 			}
@@ -428,11 +499,24 @@ func Test_deskCheck(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		{"Test1", args{board: Board{Dealer: "X"}}, true},
-		{"Test2", args{board: Board{Dealer: "N", Vulnerable: "X"}}, true},
+		{"Test1", args{board: Board{
+			Content:    []int{},
+			Dealer:     "X",
+			Vulnerable: "",
+			Comment:    jsHTTPSuitCommentOk,
+		}}, true},
+		{"Test2", args{board: Board{
+			Content:    []int{},
+			Dealer:     "N",
+			Vulnerable: "X",
+			Comment:    jsHTTPSuitCommentOk,
+		}}, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if err := boardCheck(tt.args.board); (err != nil) != tt.wantErr {
 				t.Errorf(" %v deskCheck() error = %v, wantErr %v", tt.name, err, tt.wantErr)
 			}
@@ -450,8 +534,11 @@ func Test_handToArray(t *testing.T) {
 	}{
 		{"Test1", args{mockHand}, "23.234K.234K.234K"},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := handArrayToString(tt.args.hand); got != tt.want {
 				t.Errorf("handToArray() = %v, want %v", got, tt.want)
 			}
@@ -471,8 +558,11 @@ func Test_suitHandPbnToArray(t *testing.T) {
 	}{
 		{"Test1", args{suitString: handSuitOk, suit: 2}, suitTest},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := suitHandPbnToArray(tt.args.suitString, tt.args.suit); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("suitHandPbnToArray() = %v, want %v", got, tt.want)
 			}
@@ -491,8 +581,11 @@ func TestToPbn(t *testing.T) {
 	}{
 		{"Test1", args{mockTest}, "432.432.432.5432 765.765.8765.876 T98.JT98.JT9.JT9 AKQJ.AKQ.AKQ.AKQ"},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := toPbn(tt.args.content); got != tt.want {
 				t.Errorf("ToPbn() = %v, want %v", got, tt.want)
 			}
@@ -511,8 +604,11 @@ func Test_maskToArray(t *testing.T) {
 	}{
 		{"Test1", args{maskTest}, maskArrayTest},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := MaskToArray(tt.args.mask); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("maskToArray() = %v, want %v", got, tt.want)
 			}
@@ -533,8 +629,11 @@ func Test_intInSlice(t *testing.T) {
 		{"Test1", args{a: 12, list: mockTest}, 12},
 		{"Test2", args{a: 99, list: mockTest}, -1},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := intInSlice(tt.args.a, tt.args.list); got != tt.want {
 				t.Errorf("intInSlice() = %v, want %v", got, tt.want)
 			}
@@ -554,8 +653,11 @@ func Test_delta(t *testing.T) {
 	}{
 		{"Test1", args{slice: mockTest, ToRemove: mockHand}, mockDelta},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := delta(tt.args.slice, tt.args.ToRemove); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("delta() = %v, want %v", got, tt.want)
 			}
@@ -574,8 +676,11 @@ func TestArrayToIndex(t *testing.T) {
 	}{
 		{"Test1", args{mockTest}, "53607499485911673692344531919"},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := ArrayToIndex(tt.args.content); got != tt.want {
 				t.Errorf("ArrayToIndex() = %v, want %v", got, tt.want)
 			}
@@ -594,8 +699,11 @@ func TestIndexToArray(t *testing.T) {
 	}{
 		{"Test1", args{"53607499485911673692344531919"}, mockIndexToArray},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := IndexToArray(tt.args.sIndex); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("IndexToArray() = %v, want %v", got, tt.want)
 			}
@@ -604,6 +712,7 @@ func TestIndexToArray(t *testing.T) {
 }
 
 func Test_fYshuffle(t *testing.T) {
+	t.Parallel()
 	sh := new(Random)
 	t1 := sh.fYShuffle(DC)
 	t2 := sh.fYShuffle(DC)
@@ -628,10 +737,15 @@ func Test_shuffleRemainHands(t *testing.T) {
 		{"Test2", args{mockTestOne, nil}, mockTest, false},
 		{"Test2", args{mockTestError, MockArrayOfPointNotOK}, mockTest, true},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got, err := shuffleRemainHands(sh, nil, tt.args.arrayOfPoint, tt.args.tabMask); !reflect.DeepEqual(got, tt.want) {
+			t.Parallel()
+			if got, err := shuffleRemainHands(sh, nil,
+				tt.args.arrayOfPoint,
+				tt.args.tabMask); !reflect.DeepEqual(got, tt.want) {
 				if tt.wantErr {
 					if err == nil {
 						t.Errorf("shuffleRemainHands() error = %v, wantErr %v", err, tt.wantErr)
@@ -661,9 +775,12 @@ func Test_shuffleHand(t *testing.T) {
 		{"Test2", args{mask: ""}, mockDeskArrayOk, true},
 		{"Test3", args{mask: maskDeskNot40}, mockDeskArrayOk, true},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := shuffleHand(sh, nil, tt.args.mask)
 			if tt.wantErr {
 				if err == nil {
@@ -694,10 +811,13 @@ func TestPbnGenerateFromJSON(t *testing.T) {
 		{"Test3", args{jsHTTPMaxNotOk}, jsResultHTTPMaxOk, false},
 		{"Test4", args{jsHTTPNotMaskOk}, jsResultHTTPOk, true},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	MaxPbnGeneration = 2 // Less time for running test
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := PbnDataGenerateFromJSON(sh, tt.args.js)
 			if tt.wantErr {
 				if err == nil {
@@ -726,9 +846,12 @@ func TestPbnAndIndexGenerateFromMask(t *testing.T) {
 		{"Test2", args{maskHTTPToComplete}, strDeskOk, false},
 		{"Test3", args{maskHTTPNotOk}, strDeskOk, true},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := PbnAndIndexGenerateFromMask(sh, nil, tt.args.mask)
 			if tt.wantErr {
 				if err == nil {
@@ -756,8 +879,11 @@ func TestPbnGenerateFromJSONIndex(t *testing.T) {
 		{"Test1", args{jsonIndexWebOk}, DeskIndexWebOk, false},
 		{"Test2", args{jsonIndexWebNotOk}, DeskIndexWebOk, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := PbnGenerateFromJSONIndex(tt.args.js)
 			if tt.wantErr {
 				if err == nil {
@@ -790,8 +916,11 @@ func Test_inputSuitDistToArray(t *testing.T) {
 		{"Test6", args{inputSuitDistNotOK3}, arraySuitDistok, true},
 		{"Test7", args{inputSuitDistNotOK4}, arraySuitDistok, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := inputSuitDistToArray(tt.args.input)
 			if tt.wantErr {
 				if err == nil {
@@ -817,8 +946,11 @@ func Test_getSuitFromArrayOfSuits(t *testing.T) {
 	}{
 		{"Test1", args{7}, 3},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := getSuitFromArrayOfSuits(tt.args.v); got != tt.want {
 				t.Errorf("getSuitFromArrayOfSuits() = %v, want %v", got, tt.want)
 			}
@@ -837,8 +969,11 @@ func Test_getHandFromArrayOfSuits(t *testing.T) {
 	}{
 		{"Test1", args{5}, 1},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := getHandFromArrayOfSuits(tt.args.v); got != tt.want {
 				t.Errorf("getHandFromArrayOfSuits() = %v, want %v", got, tt.want)
 			}
@@ -857,9 +992,12 @@ func Test_randomSuitsToArraySuits(t *testing.T) {
 	}{
 		{"Test1", args{maskSuitOk}, mockSuitSorted},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := randomSuitsToArraySuits(sh); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("randomSuitsToArraySuits() = %v, want %v", got, tt.want)
 			}
@@ -882,11 +1020,14 @@ func TestPbnAndIndexGenerateFromSuits(t *testing.T) {
 		{"Test3", args{maskSuitOk3}, resultSuitOk3, false},
 		{"Test4", args{maskSuitNotOk4}, resultSuitOk3, true},
 		{"Test5", args{maskSuitNotOK}, resultSuitOk3, true},
-		{"Test5", args{maskSuitEmptyOK}, resultSuitOk4, false},
+		{"Test6", args{maskSuitEmptyOK}, resultSuitOk4, false},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := PbnAndIndexGenerateFromSuits(sh, tt.args.input)
 			if tt.wantErr {
 				if err == nil {
@@ -917,8 +1058,11 @@ func Test_getASuit(t *testing.T) {
 		{"Test3", args{mockArraySuitDistok, 27, 39}, -1},
 		{"Test4", args{mockArraySuitDistok, 12, 10}, 2},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := getASuit(tt.args.arrayOfSuit, tt.args.suitFromRandom, tt.args.handFromPosition); got != tt.want {
 				t.Errorf("getASuit() = %v, want %v", got, tt.want)
 			}
@@ -939,8 +1083,11 @@ func Test_inNewPos(t *testing.T) {
 		{"Test1", args{40, mockNewpos}, false},
 		{"Test1", args{10, mockNewpos}, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := inNewPos(tt.args.v, tt.args.np); got != tt.want {
 				t.Errorf("inNewPos() = %v, want %v", got, tt.want)
 			}
@@ -964,17 +1111,19 @@ func TestPbnSuitDataGenerateFromJSON(t *testing.T) {
 		{"Test4", args{jsHTTPSuitNotOk2}, jsResultHTTPOk, true},
 		{"Test5", args{jsHTTPSuitCommentOk}, jsResultCommentHTTPOk, false},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	MaxPbnGeneration = 2 // Less time for running test
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := PbnSuitDataGenerateFromJSON(sh, tt.args.input)
 			if tt.wantErr {
 				if err == nil {
 					t.Errorf("TestPbnSuitDataGenerateFromJSON() error = %v, wantErr %v", err, tt.wantErr)
 				}
 			} else {
-
 				if !reflect.DeepEqual(got, tt.want) {
 					t.Errorf("TestPbnSuitDataGenerateFromJSON() = %v, want %v", got, tt.want)
 				}
@@ -1000,10 +1149,13 @@ func Test_getRandomFromData(t *testing.T) {
 		{"Test3", args{-1, -1, mockDataIntNotInList}, mockDataInt, true},
 		{"Test4", args{10, 11, cardsWithPoints()}, mockDataInt, true},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	loadingData := genDistWithPointToString(1, HCC)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := GetRandomFromData(sh, loadingData, tt.args.pMin, tt.args.pMax, tt.args.notInList)
 			if tt.wantErr {
 				if err == nil {
@@ -1032,9 +1184,12 @@ func TestGetPbnHandsFromPoints(t *testing.T) {
 		{"Test2", args{mockPointsNotOk}, mockPointResult, true},
 		{"Test3", args{mockPointsNotOk2}, mockPointResult, true},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := GetPbnHandsFromPoints(sh, tt.args.input)
 			if tt.wantErr {
 				if err == nil {
@@ -1063,10 +1218,13 @@ func TestPbnPointDataGenerateFromJSON(t *testing.T) {
 		{"Test2", args{jsHTTPPointNotOk}, mockJSONPointResult, true},
 		{"Test3", args{jsHTTPPointOkLimit}, mockJSONPointLimitResult, false},
 	}
+
+	t.Parallel()
 	sh := new(fakeRandom)
 	MaxPbnGeneration = 2 // Less time for running test
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := PbnPointDataGenerateFromJSON(sh, tt.args.js)
 			if tt.wantErr {
 				if err == nil {
@@ -1094,8 +1252,11 @@ func Test_checkHandPoint(t *testing.T) {
 		{"Test1", args{mockTest, MockConstraintsPointOK}, true},
 		{"Test2", args{mockTest, MockConstraintsPointNotOK}, false},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := checkHandPoint(tt.args.content, tt.args.c); got != tt.want {
 				t.Errorf("checkHandPoint() = %v, want %v", got, tt.want)
 			}
@@ -1118,8 +1279,11 @@ func Test_rotateMask(t *testing.T) {
 		{"Test4", args{dealWestOk}, pbnFromDealOk},
 		{"Test5", args{pbnFromDealOk}, pbnFromDealOk},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := rotateMask(tt.args.pbn); got != tt.want {
 				t.Errorf("rotateMask() = %v, want %v", got, tt.want)
 			}
@@ -1146,8 +1310,11 @@ func Test_inputPointsDistToStruct(t *testing.T) {
 		{"Test7", args{"0,0,0,0,0,0,A,0"}, fakePointStruct, true},
 		{"Test8", args{"0,0,0,0,0,0,0,A"}, fakePointStruct, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := inputPointsDistToStruct(tt.args.input)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("inputPointsDistToStruct() error = %v, wantErr %v", err, tt.wantErr)
@@ -1174,8 +1341,11 @@ func Test_loadData(t *testing.T) {
 	}{
 		{"Test1", args{fake2LoadData, 1, 13}, fakeLoadData, true},
 	}
+
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			_, err := loadData(tt.args.input, tt.args.pMin, tt.args.pMax)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("loadData() error = %v, wantErr %v", err, tt.wantErr)
