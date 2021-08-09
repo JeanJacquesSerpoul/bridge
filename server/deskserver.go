@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Using a lot ...
+// POST Using a lot ...
 const POST = "POST"
 
 var version = "undefined"
