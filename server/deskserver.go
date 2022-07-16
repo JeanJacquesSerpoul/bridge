@@ -262,6 +262,8 @@ func main() {
 	flag.Parse()
 
 	port := *portPtr
+	println("Listen " + port)
+
 	r := mux.NewRouter()
 
 	r.HandleFunc("/api/v1/maskmultipbn", handlerMaskMultiPbn)
